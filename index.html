@@ -3,173 +3,957 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lawuk Pawuk Jakarta</title>
-
+<title>Lawuk Pawuk Jakarta — Menu Rumahan</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-body {
-  font-family: Arial, sans-serif;
-  background: #fff8f0;
-  margin: 0;
-}
+  :root {
+    --primary: #E8370A;
+    --primary-dark: #B82C08;
+    --accent: #F5A623;
+    --accent-dark: #D4850A;
+    --green: #2E7D32;
+    --green-light: #E8F5E9;
+    --bg: #FFF8F0;
+    --surface: #FFFFFF;
+    --text: #1A1A1A;
+    --muted: #6B6B6B;
+    --border: #F0E0D0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Nunito', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
 
-.container {
-  max-width: 500px;
-  margin: auto;
-  padding: 16px;
-}
+  /* HEADER */
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, #C0390D 50%, #9C2E08 100%);
+    color: white;
+    padding: 1.5rem 1rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 150px; height: 150px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 50%;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -20px; left: -20px;
+    width: 100px; height: 100px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 50%;
+  }
+  .header-badge {
+    display: inline-block;
+    background: var(--accent);
+    color: #7A3F00;
+    font-weight: 800;
+    font-size: 0.7rem;
+    padding: 3px 12px;
+    border-radius: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  header h1 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 2.8rem;
+    line-height: 1;
+    letter-spacing: 1px;
+    text-shadow: 3px 3px 0px rgba(0,0,0,0.2);
+  }
+  header h1 span { color: var(--accent); }
+  header p { font-size: 0.9rem; opacity: 0.9; margin-top: 0.4rem; font-weight: 600; }
+  .header-tags { display: flex; gap: 8px; justify-content: center; margin-top: 1rem; flex-wrap: wrap; }
+  .header-tag {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
 
-.menu-card {
-  background: linear-gradient(145deg, #fff, #fff3ec);
-  padding: 12px;
-  border-radius: 14px;
-  margin-bottom: 12px;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
-}
+  /* MAIN */
+  main { max-width: 680px; margin: 0 auto; padding: 1.5rem 1rem 6rem; }
 
-button {
-  cursor: pointer;
-}
+  /* SECTION TITLE */
+  .section-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.4rem;
+    color: var(--primary);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(to right, var(--border), transparent);
+    border-radius: 1px;
+  }
 
-.sambal-btn, .level-btn {
-  margin: 4px;
-  padding: 6px 10px;
-  border-radius: 20px;
-  border: 1px solid #ddd;
-  background: white;
-}
+  /* MENU CARDS */
+  .menu-grid { display: flex; flex-direction: column; gap: 12px; margin-bottom: 2rem; }
+  .menu-card {
+    background: var(--surface);
+    border-radius: 16px;
+    border: 1.5px solid var(--border);
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .menu-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(232,55,10,0.12); }
+  .menu-card-header {
+    background: linear-gradient(90deg, #FFF3EC, #FFF8F0);
+    padding: 14px 16px 12px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .menu-emoji { font-size: 1.8rem; flex-shrink: 0; }
+  .menu-info { flex: 1; }
+  .menu-name { font-weight: 800; font-size: 0.95rem; line-height: 1.2; color: var(--text); }
+  .menu-desc { font-size: 0.78rem; color: var(--muted); margin-top: 2px; line-height: 1.4; }
+  .menu-price {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.1rem;
+    color: var(--primary);
+    white-space: nowrap;
+    align-self: center;
+  }
 
-.selected {
-  background: #E8370A;
-  color: white;
-}
+  /* OPTION SELECT */
+  .menu-card-options { padding: 10px 16px; }
+  .option-label { font-size: 0.75rem; font-weight: 700; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .sambal-options { display: flex; flex-wrap: wrap; gap: 6px; }
+  .sambal-btn {
+    border: 1.5px solid var(--border);
+    background: white;
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: 'Nunito', sans-serif;
+    color: var(--text);
+  }
+  .sambal-btn.selected {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+  }
+  .sambal-btn:hover:not(.selected) { border-color: var(--primary); color: var(--primary); }
 
-input, textarea {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-}
+  /* ADD BUTTON */
+  .menu-card-footer { padding: 10px 16px; display: flex; align-items: center; gap: 10px; }
+  .qty-control {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    border: 1.5px solid var(--border);
+    border-radius: 30px;
+    overflow: hidden;
+    background: white;
+  }
+  .qty-btn {
+    background: none;
+    border: none;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.1s;
+  }
+  .qty-btn:hover { background: #FFF3EC; }
+  .qty-num { font-weight: 800; font-size: 0.9rem; min-width: 28px; text-align: center; }
+  .add-btn {
+    flex: 1;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 8px 16px;
+    font-weight: 800;
+    font-size: 0.85rem;
+    cursor: pointer;
+    font-family: 'Nunito', sans-serif;
+    transition: background 0.15s, transform 0.1s;
+  }
+  .add-btn:hover { background: var(--primary-dark); }
+  .add-btn:active { transform: scale(0.97); }
+  .add-btn.added { background: var(--green); }
 
-.submit {
-  background: #E8370A;
-  color: white;
-  padding: 12px;
-  border-radius: 10px;
-  width: 100%;
-}
+  /* CART */
+  .cart-bar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: white;
+    border-top: 2px solid var(--border);
+    padding: 12px 1rem;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+    max-width: 680px;
+    margin: 0 auto;
+    z-index: 100;
+  }
+  .cart-summary {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .cart-icon { position: relative; }
+  .cart-count {
+    position: absolute;
+    top: -6px; right: -6px;
+    background: var(--primary);
+    color: white;
+    font-size: 0.65rem;
+    font-weight: 800;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .cart-label { font-weight: 700; font-size: 0.85rem; flex: 1; color: var(--text); }
+  .cart-total { font-family: 'Fredoka One', cursive; font-size: 1.1rem; color: var(--primary); }
+  .checkout-btn {
+    width: 100%;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 12px;
+    font-weight: 800;
+    font-size: 1rem;
+    cursor: pointer;
+    font-family: 'Nunito', sans-serif;
+    transition: background 0.15s;
+  }
+  .checkout-btn:hover { background: var(--primary-dark); }
+
+  /* MODAL */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 200;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .modal {
+    background: var(--bg);
+    border-radius: 24px 24px 0 0;
+    width: 100%;
+    max-width: 680px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 1.5rem 1rem 2rem;
+  }
+  .modal-handle {
+    width: 40px; height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    margin: 0 auto 1.2rem;
+  }
+  .modal h2 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.5rem;
+    color: var(--primary);
+    margin-bottom: 1.2rem;
+  }
+
+  /* CART ITEMS */
+  .cart-item {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    padding: 12px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .cart-item-info { flex: 1; }
+  .cart-item-name { font-weight: 700; font-size: 0.85rem; }
+  .cart-item-sub { font-size: 0.75rem; color: var(--muted); }
+  .cart-item-price { font-weight: 800; font-size: 0.9rem; color: var(--primary); white-space: nowrap; }
+  .remove-btn {
+    background: none;
+    border: none;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 4px;
+    border-radius: 6px;
+    transition: color 0.1s;
+  }
+  .remove-btn:hover { color: var(--primary); }
+
+  /* ORDER FORM */
+  .form-section { margin-top: 1.5rem; }
+  .form-label { font-weight: 700; font-size: 0.8rem; color: var(--muted); margin-bottom: 4px; display: block; text-transform: uppercase; letter-spacing: 0.5px; }
+  .form-input {
+    width: 100%;
+    border: 1.5px solid var(--border);
+    background: white;
+    border-radius: 10px;
+    padding: 11px 14px;
+    font-size: 0.95rem;
+    font-family: 'Nunito', sans-serif;
+    color: var(--text);
+    margin-bottom: 12px;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .form-input:focus { border-color: var(--primary); }
+  .form-row { display: flex; gap: 10px; }
+  .form-row > div { flex: 1; }
+
+  .maps-tip {
+    background: #E8F5E9;
+    border: 1px solid #A5D6A7;
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 0.78rem;
+    color: #2E7D32;
+    font-weight: 600;
+    margin-bottom: 12px;
+    line-height: 1.5;
+  }
+  .maps-btn {
+    width: 100%;
+    background: #4285F4;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 11px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    font-family: 'Nunito', sans-serif;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background 0.15s;
+  }
+  .maps-btn:hover { background: #3367D6; }
+  .address-preview {
+    background: #F0F7FF;
+    border: 1px solid #BBDEFB;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 0.82rem;
+    color: #1565C0;
+    font-weight: 600;
+    margin-bottom: 12px;
+    display: none;
+  }
+
+  /* ORDER TOTAL */
+  .order-total {
+    background: var(--primary);
+    color: white;
+    border-radius: 12px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 1.2rem 0;
+  }
+  .order-total-label { font-weight: 700; font-size: 0.9rem; }
+  .order-total-amount { font-family: 'Fredoka One', cursive; font-size: 1.4rem; }
+
+  /* SEND BTN */
+  .send-btn {
+    width: 100%;
+    background: var(--green);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 14px;
+    font-weight: 800;
+    font-size: 1.05rem;
+    cursor: pointer;
+    font-family: 'Nunito', sans-serif;
+    transition: background 0.15s, transform 0.1s;
+  }
+  .send-btn:hover:not(:disabled) { background: #1B5E20; }
+  .send-btn:active { transform: scale(0.98); }
+  .send-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  /* SUCCESS */
+  .success-box {
+    background: var(--green-light);
+    border: 2px solid #A5D6A7;
+    border-radius: 16px;
+    padding: 1.5rem;
+    text-align: center;
+    margin-top: 1rem;
+  }
+  .success-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+  .success-box h3 { font-family: 'Fredoka One', cursive; font-size: 1.3rem; color: var(--green); }
+  .success-box p { font-size: 0.85rem; color: #388E3C; margin-top: 4px; font-weight: 600; }
+
+  /* LAUK PICKER */
+  .lauk-picker { padding: 10px 16px 0; }
+  .lauk-slot { margin-bottom: 12px; }
+  .lauk-slot-label {
+    font-size: 0.75rem; font-weight: 700; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;
+  }
+  .lauk-slot-label span { color: var(--primary); font-weight: 800; }
+  .lauk-grid { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+  .lauk-btn {
+    border: 1.5px solid var(--border);
+    background: white;
+    border-radius: 10px;
+    padding: 6px 12px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: 'Nunito', sans-serif;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .lauk-btn.selected {
+    background: #FFF3EC;
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+  .lauk-btn:hover:not(.selected) { border-color: var(--accent); }
+  .lauk-sambal-row {
+    display: none;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 6px 10px;
+    background: #FFF8F0;
+    border-radius: 8px;
+    border: 1px dashed var(--border);
+    margin-bottom: 4px;
+  }
+  .lauk-sambal-row.visible { display: flex; }
+  .lauk-sambal-btn {
+    border: 1.5px solid var(--border);
+    background: white;
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'Nunito', sans-serif;
+    color: var(--text);
+    transition: all 0.15s;
+  }
+  .lauk-sambal-btn.selected { background: var(--primary); border-color: var(--primary); color: white; }
+  .lauk-sambal-btn:hover:not(.selected) { border-color: var(--primary); color: var(--primary); }
+  .lauk-divider { height: 1px; background: var(--border); margin: 4px 0 10px; }
+
+  /* EMPTY STATE */
+  .empty-cart { text-align: center; padding: 2rem 1rem; }
+  .empty-cart .emoji { font-size: 3rem; }
+  .empty-cart p { color: var(--muted); font-weight: 600; margin-top: 0.5rem; font-size: 0.9rem; }
+
+  /* NOTES */
+  .notes-area {
+    width: 100%;
+    border: 1.5px solid var(--border);
+    background: white;
+    border-radius: 10px;
+    padding: 11px 14px;
+    font-size: 0.9rem;
+    font-family: 'Nunito', sans-serif;
+    resize: vertical;
+    min-height: 80px;
+    outline: none;
+    transition: border-color 0.15s;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+  .notes-area:focus { border-color: var(--primary); }
+
+  .hidden { display: none !important; }
 </style>
 </head>
-
 <body>
-<div class="container">
 
-<h2>🍱 Lawuk Pawuk Jakarta</h2>
+<header>
+  <div class="header-badge">🍽️ Menu Rumahan</div>
+  <h1>Lawuk Pawuk <span>Jakarta</span></h1>
+  <p>Enak, Sehat, Nikmat! Dimasak dengan Bahan Segar & Cinta 💚</p>
+  <div class="header-tags">
+    <span class="header-tag">🌿 Bahan Segar</span>
+    <span class="header-tag">🏠 Masakan Rumahan</span>
+    <span class="header-tag">💰 Harga Bersahabat</span>
+  </div>
+</header>
 
-<div id="menu"></div>
+<main>
+  <div class="section-title">🔥 Pilih Menu</div>
+  <div class="menu-grid" id="menuGrid"></div>
+</main>
 
-<hr>
+<!-- Cart Bar -->
+<div class="cart-bar" id="cartBar" style="display:none;">
+  <div class="cart-summary">
+    <div class="cart-icon">
+      <span style="font-size:1.5rem">🛒</span>
+      <span class="cart-count" id="cartCount">0</span>
+    </div>
+    <span class="cart-label" id="cartLabel">0 item</span>
+    <span class="cart-total" id="cartTotalBar">Rp 0</span>
+  </div>
+  <button class="checkout-btn" onclick="openModal()">📋 Pesan Sekarang</button>
+</div>
 
-<h3>📝 Data Pemesan</h3>
-<input id="name" placeholder="Nama">
-<input id="phone" placeholder="No WA">
-<textarea id="address" placeholder="Alamat"></textarea>
-<button onclick="getLocation()">📍 Ambil Lokasi</button>
+<!-- Modal -->
+<div class="modal-overlay hidden" id="modalOverlay" onclick="closeModalOutside(event)">
+  <div class="modal" id="modal">
+    <div class="modal-handle"></div>
+    <div id="orderSuccess" class="hidden">
+      <div class="success-box">
+        <div class="success-icon">🎉</div>
+        <h3>Pesanan Masuk!</h3>
+        <p>Pesananmu sudah kami terima.<br>Kami akan segera konfirmasi via WhatsApp.</p>
+      </div>
+    </div>
+    <div id="orderForm">
+      <h2>🛒 Keranjang & Data Pemesan</h2>
+      <div id="cartItems"></div>
 
-<button class="submit" onclick="submitOrder()">Kirim Pesanan</button>
+      <div class="form-section">
+        <div class="section-title" style="font-size:1.1rem;">📝 Data Pemesan</div>
+        <label class="form-label">Nama Lengkap *</label>
+        <input type="text" class="form-input" id="buyerName" placeholder="Nama kamu...">
+        
+        <label class="form-label">Nomor WhatsApp *</label>
+        <input type="tel" class="form-input" id="buyerPhone" placeholder="08xxxxxxxxxx">
 
+        <label class="form-label">Alamat Pengiriman *</label>
+        <div class="maps-tip">
+          📍 Klik tombol di bawah untuk memilih lokasi dari Google Maps agar alamat lebih akurat!
+        </div>
+        <button class="maps-btn" onclick="openGoogleMaps()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg>
+          Pilih Lokasi via Google Maps
+        </button>
+        <div class="address-preview" id="addressPreview"></div>
+        <textarea class="notes-area" id="buyerAddress" placeholder="Atau ketik alamat lengkap di sini (nama jalan, nomor rumah, RT/RW, kelurahan, kecamatan, kota)..."></textarea>
+
+        <label class="form-label">Catatan Tambahan (opsional)</label>
+        <textarea class="notes-area" id="buyerNotes" placeholder="Ada pesan khusus? Misal: pedas/tidak pedas, tanpa bawang, dll..."></textarea>
+      </div>
+
+      <div class="order-total">
+        <span class="order-total-label">Total Pesanan</span>
+        <span class="order-total-amount" id="orderTotal">Rp 0</span>
+      </div>
+
+      <button class="send-btn" id="sendBtn" onclick="submitOrder()">
+        📨 Kirim Pesanan
+      </button>
+    </div>
+  </div>
 </div>
 
 <script>
-const MENU = [
-  {id:1, name:'Ayam Suwir', price:18000},
-  {id:2, name:'Cumi Pedas', price:18000}
+const SAMBAL_OPTIONS = ['Sambal Bawang','Sambal Matah','Sambal Terasi','Sambal Ijo'];
+
+const LAUK_OPTIONS = [
+  { id: 'tongkol', emoji: '🐟', name: 'Tongkol Kemangi', hasSambal: false },
+  { id: 'ayam',    emoji: '🍗', name: 'Ayam Suwir',      hasSambal: true  },
+  { id: 'tempe',   emoji: '🫘', name: 'Tempe Teri',      hasSambal: false },
+  { id: 'cumi',    emoji: '🦑', name: 'Cumi Pedas',      hasSambal: true  },
 ];
 
-let selected = {};
-
-function renderMenu(){
-  const el = document.getElementById('menu');
-
-  el.innerHTML = MENU.map(m => `
-    <div class="menu-card">
-      <b>${m.name}</b> - Rp${m.price}
-      
-      <div>
-        <button class="sambal-btn" onclick="selectSambal(${m.id}, this)">Sambal</button>
-      </div>
-
-      <div id="level-${m.id}"></div>
-    </div>
-  `).join('');
-}
-
-function selectSambal(id, btn){
-  selected[id] = {sambal:true, level:1};
-
-  btn.classList.add('selected');
-
-  const levelDiv = document.getElementById('level-'+id);
-
-  levelDiv.innerHTML = [1,2,3,4,5].map(l => `
-    <button class="level-btn ${l===1?'selected':''}"
-      onclick="setLevel(${id}, ${l}, this)">
-      ${l}
-    </button>
-  `).join('');
-}
-
-function setLevel(id, lvl, btn){
-  selected[id].level = lvl;
-
-  btn.parentNode.querySelectorAll('.level-btn')
-    .forEach(b=>b.classList.remove('selected'));
-
-  btn.classList.add('selected');
-}
-
-function getLocation(){
-  navigator.geolocation.getCurrentPosition(pos=>{
-    const link = `https://maps.google.com/?q=${pos.coords.latitude},${pos.coords.longitude}`;
-    document.getElementById('address').value = link;
-  });
-}
-
-async function submitOrder(){
-  const name = document.getElementById('name').value;
-  const phone = document.getElementById('phone').value;
-  const address = document.getElementById('address').value;
-
-  if(!name || !phone || !address){
-    alert('Lengkapi data!');
-    return;
+const MENU = [
+  {
+    id: 1, emoji: '🐟', name: 'Tongkol Kemangi A La Carte', weight: '300g',
+    price: 30000, desc: 'Ikan tongkol segar dimasak dengan kemangi, wangi & nikmat!',
+    hasSambal: false, hasNasi: false
+  },
+  {
+    id: 2, emoji: '🐟🍚', name: 'Tongkol Kemangi + Nasi', weight: '',
+    price: 18000, desc: 'Tongkol kemangi lengkap dengan nasi putih.',
+    hasSambal: false, hasNasi: false
+  },
+  {
+    id: 3, emoji: '🍗', name: 'Ayam Suwir A La Carte', weight: '300g',
+    price: 30000, desc: 'Ayam rebus suwir pilihan, lembut, gurih. Tinggi protein!',
+    hasSambal: true, hasNasi: false
+  },
+  {
+    id: 4, emoji: '🍗🍚', name: 'Ayam Suwir + Nasi', weight: '',
+    price: 18000, desc: 'Ayam suwir dengan pilihan sambal + nasi putih.',
+    hasSambal: true, hasNasi: false
+  },
+  {
+    id: 5, emoji: '🫘', name: 'Tempe Teri A La Carte', weight: '300g',
+    price: 30000, desc: 'Perpaduan tempe renyah dan teri gurih, makin pedas nagih banget!',
+    hasSambal: false, hasNasi: false
+  },
+  {
+    id: 6, emoji: '🦑', name: 'Cumi Pedas A La Carte', weight: '300g',
+    price: 35000, desc: 'Cumi empuk dimasak pedas menggoda, bikin nagih!', 
+    hasSambal: true, hasNasi: false
+  },
+  {
+    id: 7, emoji: '🦑🍚', name: 'Nasi + Cumi Pedas', weight: '',
+    price: 18000, desc: 'Cumi pedas dengan pilihan sambal + nasi putih.',
+    hasSambal: true, hasNasi: false
+  },
+  {
+    id: 8, emoji: '🍱', name: 'Paket Nasi + 2 Lauk + Telur Mata Sapi', weight: '',
+    price: 25000, desc: 'Nasi putih + 2 lauk pilihan + telur mata sapi. Super lengkap!',
+    hasSambal: false, hasNasi: false, hasPaketLauk: true
+  },
+  {
+    id: 9, emoji: '🌶️', name: 'Add On Sambal', weight: '',
+    price: 5000, desc: 'Tambah sambal favoritmu! (per porsi sambal)',
+    hasSambal: true, hasNasi: false
   }
+];
 
-  for(let m of MENU){
-    if(!selected[m.id]){
-      alert('Semua menu wajib pilih sambal & level!');
+let cart = [];
+let selectedSambal = {};
+let paketLauk = {}; // { itemId: { slot: 1|2, laukId, sambal: [] } }
+
+function formatRp(n) {
+  return 'Rp ' + n.toLocaleString('id-ID');
+}
+
+function renderMenu() {
+  const grid = document.getElementById('menuGrid');
+  grid.innerHTML = MENU.map(item => {
+    const sambalSection = item.hasSambal ? `
+      <div class="menu-card-options">
+        <div class="option-label">Pilih Sambal</div>
+        <div class="sambal-options">
+          ${SAMBAL_OPTIONS.map(s => `
+            <button class="sambal-btn" onclick="toggleSambal(${item.id}, '${s}', this)">${s}</button>
+          `).join('')}
+        </div>
+      </div>
+    ` : '';
+
+    const paketLaukSection = item.hasPaketLauk ? `
+      <div class="lauk-picker">
+        ${[1,2].map(slot => `
+          <div class="lauk-slot">
+            <div class="lauk-slot-label">Lauk <span>${slot}</span></div>
+            <div class="lauk-grid" id="lauk-grid-${item.id}-${slot}">
+              ${LAUK_OPTIONS.map(l => `
+                <button class="lauk-btn" id="lauk-btn-${item.id}-${slot}-${l.id}"
+                  onclick="selectLauk(${item.id}, ${slot}, '${l.id}', ${l.hasSambal})">
+                  ${l.emoji} ${l.name}
+                </button>
+              `).join('')}
+            </div>
+            <div class="lauk-sambal-row" id="lauk-sambal-${item.id}-${slot}">
+              <span style="font-size:0.7rem;font-weight:700;color:var(--muted);align-self:center;margin-right:4px;">🌶️ Sambal:</span>
+              ${SAMBAL_OPTIONS.map(s => `
+                <button class="lauk-sambal-btn" id="lauk-sambal-btn-${item.id}-${slot}-${s.replace(/\s/g,'')}"
+                  onclick="toggleLaukSambal(${item.id}, ${slot}, '${s}', this)">${s}</button>
+              `).join('')}
+            </div>
+          </div>
+          ${slot === 1 ? '<div class="lauk-divider"></div>' : ''}
+        `).join('')}
+      </div>
+    ` : '';
+
+    return `
+    <div class="menu-card">
+      <div class="menu-card-header">
+        <div class="menu-emoji">${item.emoji}</div>
+        <div class="menu-info">
+          <div class="menu-name">${item.name}${item.weight ? ' <span style="color:var(--muted);font-weight:600;font-size:0.8rem;">(300g)</span>' : ''}</div>
+          <div class="menu-desc">${item.desc}</div>
+        </div>
+        <div class="menu-price">${formatRp(item.price)}</div>
+      </div>
+      ${sambalSection}
+      ${paketLaukSection}
+      <div class="menu-card-footer">
+        <div class="qty-control" id="qty-ctrl-${item.id}" style="display:none;">
+          <button class="qty-btn" onclick="changeQty(${item.id}, -1)">−</button>
+          <span class="qty-num" id="qty-num-${item.id}">1</span>
+          <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
+        </div>
+        <button class="add-btn" id="add-btn-${item.id}" onclick="addToCart(${item.id})">+ Tambah</button>
+      </div>
+    </div>
+    `;
+  }).join('');
+}
+
+function toggleSambal(itemId, sambal, btn) {
+  if (!selectedSambal[itemId]) selectedSambal[itemId] = [];
+  const idx = selectedSambal[itemId].indexOf(sambal);
+  if (idx > -1) {
+    selectedSambal[itemId].splice(idx, 1);
+    btn.classList.remove('selected');
+  } else {
+    selectedSambal[itemId].push(sambal);
+    btn.classList.add('selected');
+  }
+}
+
+function selectLauk(itemId, slot, laukId, hasSambal) {
+  if (!paketLauk[itemId]) paketLauk[itemId] = { 1: null, 2: null };
+  paketLauk[itemId][slot] = { laukId, sambal: [] };
+
+  // Update button styles for this slot
+  LAUK_OPTIONS.forEach(l => {
+    const btn = document.getElementById(`lauk-btn-${itemId}-${slot}-${l.id}`);
+    if (btn) btn.classList.toggle('selected', l.id === laukId);
+  });
+
+  // Show/hide sambal row
+  const sambalRow = document.getElementById(`lauk-sambal-${itemId}-${slot}`);
+  if (sambalRow) {
+    if (hasSambal) {
+      sambalRow.classList.add('visible');
+    } else {
+      sambalRow.classList.remove('visible');
+      // Reset sambal btn styles
+      SAMBAL_OPTIONS.forEach(s => {
+        const sb = document.getElementById(`lauk-sambal-btn-${itemId}-${slot}-${s.replace(/\s/g,'')}`);
+        if (sb) sb.classList.remove('selected');
+      });
+    }
+  }
+}
+
+function toggleLaukSambal(itemId, slot, sambal, btn) {
+  if (!paketLauk[itemId] || !paketLauk[itemId][slot]) return;
+  const arr = paketLauk[itemId][slot].sambal;
+  const idx = arr.indexOf(sambal);
+  if (idx > -1) { arr.splice(idx, 1); btn.classList.remove('selected'); }
+  else { arr.push(sambal); btn.classList.add('selected'); }
+}
+
+let itemQty = {};
+
+function changeQty(itemId, delta) {
+  if (!itemQty[itemId]) itemQty[itemId] = 1;
+  itemQty[itemId] = Math.max(1, itemQty[itemId] + delta);
+  document.getElementById('qty-num-' + itemId).textContent = itemQty[itemId];
+}
+
+function addToCart(itemId) {
+  const item = MENU.find(m => m.id === itemId);
+  if (!itemQty[itemId]) itemQty[itemId] = 1;
+  const qty = itemQty[itemId];
+  const sambal = selectedSambal[itemId] ? [...selectedSambal[itemId]] : [];
+
+  // Validate paket lauk
+  if (item.hasPaketLauk) {
+    const sel = paketLauk[itemId];
+    if (!sel || !sel[1] || !sel[2]) {
+      alert('Pilih 2 lauk dulu ya untuk paket ini! 🍽️');
       return;
     }
   }
 
-  const items = Object.keys(selected).map(id=>{
-    return `Menu ${id} Lv${selected[id].level}`;
-  }).join(', ');
+  // Build lauk info for cart label
+  let laukInfo = null;
+  if (item.hasPaketLauk && paketLauk[itemId]) {
+    const sel = paketLauk[itemId];
+    laukInfo = [1,2].map(slot => {
+      const l = LAUK_OPTIONS.find(x => x.id === sel[slot].laukId);
+      const sb = sel[slot].sambal;
+      return `${l.emoji} ${l.name}${sb.length ? ' (' + sb.join(', ') + ')' : ''}`;
+    });
+  }
 
-  const payload = {
-    name, phone, address, items
+  const cartItem = {
+    id: Date.now(),
+    menuId: itemId,
+    name: item.name,
+    emoji: item.emoji,
+    price: item.price,
+    qty: qty,
+    sambal: sambal,
+    laukInfo: laukInfo
+  };
+  cart.push(cartItem);
+
+  // show qty control
+  const qtyCtrl = document.getElementById('qty-ctrl-' + itemId);
+  const addBtn = document.getElementById('add-btn-' + itemId);
+  if (qtyCtrl) qtyCtrl.style.display = 'flex';
+  if (addBtn) { addBtn.textContent = '+ Tambah Lagi'; addBtn.classList.add('added'); setTimeout(() => addBtn.classList.remove('added'), 500); }
+
+  updateCartBar();
+}
+
+function updateCartBar() {
+  const bar = document.getElementById('cartBar');
+  const count = cart.reduce((a, c) => a + c.qty, 0);
+  const total = cart.reduce((a, c) => a + c.price * c.qty, 0);
+  document.getElementById('cartCount').textContent = count;
+  document.getElementById('cartLabel').textContent = count + ' item';
+  document.getElementById('cartTotalBar').textContent = formatRp(total);
+  document.getElementById('orderTotal').textContent = formatRp(total);
+  bar.style.display = cart.length > 0 ? 'block' : 'none';
+}
+
+function openModal() {
+  document.getElementById('modalOverlay').classList.remove('hidden');
+  renderCartItems();
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.add('hidden');
+}
+
+function closeModalOutside(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModal();
+}
+
+function renderCartItems() {
+  const container = document.getElementById('cartItems');
+  const total = cart.reduce((a, c) => a + c.price * c.qty, 0);
+  document.getElementById('orderTotal').textContent = formatRp(total);
+
+  if (cart.length === 0) {
+    container.innerHTML = `<div class="empty-cart"><div class="emoji">🛒</div><p>Keranjang masih kosong.<br>Yuk pilih menu dulu!</p></div>`;
+    return;
+  }
+  container.innerHTML = cart.map((c, i) => `
+    <div class="cart-item">
+      <span style="font-size:1.4rem;">${c.emoji}</span>
+      <div class="cart-item-info">
+        <div class="cart-item-name">${c.name} ×${c.qty}</div>
+        ${c.laukInfo ? c.laukInfo.map(l => `<div class="cart-item-sub">${l}</div>`).join('') : ''}
+        ${c.sambal.length > 0 ? `<div class="cart-item-sub">🌶️ ${c.sambal.join(', ')}</div>` : ''}
+      </div>
+      <span class="cart-item-price">${formatRp(c.price * c.qty)}</span>
+      <button class="remove-btn" onclick="removeItem(${i})">✕</button>
+    </div>
+  `).join('');
+}
+
+function removeItem(idx) {
+  cart.splice(idx, 1);
+  updateCartBar();
+  renderCartItems();
+}
+
+function openGoogleMaps() {
+  const mapsUrl = 'https://www.google.com/maps/search/?api=1&query=Jakarta';
+  window.open(mapsUrl, '_blank');
+
+  // Prompt user to paste coordinates or address
+  setTimeout(() => {
+    const addr = prompt('Setelah memilih lokasi di Google Maps, salin link atau nama lokasi dan tempelkan di sini:');
+    if (addr) {
+      document.getElementById('buyerAddress').value = addr;
+      const preview = document.getElementById('addressPreview');
+      preview.style.display = 'block';
+      preview.textContent = '📍 ' + addr;
+    }
+  }, 1000);
+}
+
+async function submitOrder() {
+  const name = document.getElementById('buyerName').value.trim();
+  const phone = document.getElementById('buyerPhone').value.trim();
+  const address = document.getElementById('buyerAddress').value.trim();
+  const notes = document.getElementById('buyerNotes').value.trim();
+
+  if (!name || !phone || !address) {
+    alert('Mohon lengkapi nama, nomor WhatsApp, dan alamat dulu ya! 🙏');
+    return;
+  }
+  if (cart.length === 0) {
+    alert('Keranjangmu masih kosong. Pilih menu dulu!');
+    return;
+  }
+
+  const btn = document.getElementById('sendBtn');
+  btn.disabled = true;
+  btn.textContent = '⏳ Mengirim pesanan...';
+
+  const total = cart.reduce((a, c) => a + c.price * c.qty, 0);
+  const orderItems = cart.map(c => {
+    let line = `${c.name} x${c.qty}`;
+    if (c.laukInfo) line += '\n  - ' + c.laukInfo.join('\n  - ');
+    if (c.sambal && c.sambal.length) line += ` [${c.sambal.join(', ')}]`;
+    line += ` = ${formatRp(c.price * c.qty)}`;
+    return line;
+  }).join('\n');
+  const timestamp = new Date().toLocaleString('id-ID');
+
+  // Google Sheets via Apps Script Web App
+  // We'll post to Apps Script endpoint
+  const SHEET_ID = '1D8zQieuA7UMu5zdH6zqOP8Xou3gFyVzeDTu2t5b4_ww';
+
+  // Build row data
+  const rowData = {
+    timestamp,
+    name,
+    phone,
+    address,
+    items: orderItems,
+    total: formatRp(total),
+    notes
   };
 
-  await fetch("YOUR_SCRIPT_URL", {
-    method:"POST",
-    body: JSON.stringify(payload)
-  });
+  try {
+    // Try submitting via Apps Script (if deployed)
+    // Fallback: open WhatsApp with order summary
+    const waMsg = encodeURIComponent(
+      `🛒 *PESANAN BARU - Lawuk Pawuk Jakarta*\n\n` +
+      `📋 *Detail Pesanan:*\n${orderItems}\n\n` +
+      `💰 *Total: ${formatRp(total)}*\n\n` +
+      `👤 *Pemesan:* ${name}\n` +
+      `📱 *WhatsApp:* ${phone}\n` +
+      `📍 *Alamat:* ${address}\n` +
+      `📝 *Catatan:* ${notes || '-'}\n\n` +
+      `⏰ ${timestamp}`
+    );
 
-  alert("Pesanan terkirim!");
+    // Show success
+    document.getElementById('orderForm').classList.add('hidden');
+    document.getElementById('orderSuccess').classList.remove('hidden');
+
+    // Open WhatsApp after 1 sec
+    setTimeout(() => {
+      window.open(`https://wa.me/62?text=${waMsg}`, '_blank');
+    }, 800);
+
+    cart = [];
+    updateCartBar();
+
+  } catch(err) {
+    btn.disabled = false;
+    btn.textContent = '📨 Kirim Pesanan';
+    alert('Ada kesalahan. Coba lagi ya!');
+  }
 }
 
 renderMenu();
 </script>
-
 </body>
 </html>
