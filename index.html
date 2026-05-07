@@ -5,360 +5,190 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lawuk Pawuk Jakarta</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<!-- Google Maps Places API — ganti YOUR_GMAPS_KEY dengan API key kamu -->
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GMAPS_KEY&libraries=places&language=id&callback=initMaps" async defer></script>
 <style>
 :root {
-  --red: #C8300A;
-  --red-dark: #9E2508;
-  --red-light: #FDF0EC;
-  --gold: #C8960A;
-  --surface: #FFFFFF;
-  --bg: #FAF7F4;
-  --text: #18120E;
-  --muted: #7A6A60;
-  --border: #EDE0D8;
-  --shadow: rgba(30,15,5,0.08);
-  --green: #1B6B35;
-  --green-light: #EBF5EF;
+  --red:#C8300A; --red-d:#9E2508; --red-l:#FDF0EC;
+  --gold:#C8960A; --gold-l:#FDF7E6;
+  --bg:#FAF7F4; --surface:#FFF;
+  --text:#18120E; --muted:#7A6A60; --border:#EDE0D8;
+  --shadow:rgba(30,15,5,0.09);
+  --green:#1B6B35; --green-l:#EBF5EF;
 }
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased; }
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased}
 
-/* HEADER */
-header { background: var(--text); color: white; position: relative; overflow: hidden; }
-.header-decor {
-  position: absolute; inset: 0;
-  background: radial-gradient(ellipse at 15% 50%, rgba(200,48,10,0.28) 0%, transparent 55%),
-              radial-gradient(ellipse at 85% 20%, rgba(200,150,10,0.15) 0%, transparent 50%);
-}
-.header-inner { position: relative; z-index: 2; padding: 2.5rem 1.5rem 2rem; text-align: center; }
-.header-pill {
-  display: inline-flex; align-items: center; gap: 6px;
-  background: rgba(200,150,10,0.18); border: 1px solid rgba(200,150,10,0.4);
-  color: #F0C040; font-size: 0.68rem; font-weight: 700;
-  letter-spacing: 1.5px; text-transform: uppercase;
-  padding: 5px 14px; border-radius: 30px; margin-bottom: 1rem;
-}
-header h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2rem, 8vw, 3rem); font-weight: 800;
-  line-height: 1.05; letter-spacing: -0.5px;
-}
-header h1 em { font-style: normal; color: #F0A050; }
-header p { font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-top: 0.6rem; font-weight: 500; }
-.header-chips { display: flex; gap: 8px; justify-content: center; margin-top: 1.4rem; flex-wrap: wrap; }
-.header-chip {
-  display: inline-flex; align-items: center; gap: 5px;
-  background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 20px; padding: 5px 13px;
-  font-size: 0.71rem; font-weight: 600; color: rgba(255,255,255,0.78);
-}
-.header-bottom {
-  position: relative; z-index: 2;
-  background: var(--red); padding: 9px 1.5rem;
-  text-align: center; font-size: 0.76rem; font-weight: 700;
-  color: rgba(255,255,255,0.92); letter-spacing: 0.3px;
-}
+/* ── HEADER ── */
+header{background:var(--text);color:#fff;position:relative;overflow:hidden}
+.hd{position:absolute;inset:0;background:radial-gradient(ellipse at 15% 60%,rgba(200,48,10,.28) 0%,transparent 55%),radial-gradient(ellipse at 85% 20%,rgba(200,150,10,.15) 0%,transparent 50%)}
+.hi{position:relative;z-index:2;padding:2.5rem 1.5rem 2rem;text-align:center}
+.hpill{display:inline-flex;align-items:center;gap:6px;background:rgba(200,150,10,.18);border:1px solid rgba(200,150,10,.4);color:#F0C040;font-size:.68rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:5px 14px;border-radius:30px;margin-bottom:1rem}
+header h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,8vw,3rem);font-weight:800;line-height:1.05;letter-spacing:-.5px}
+header h1 em{font-style:normal;color:#F0A050}
+header p{font-size:.85rem;color:rgba(255,255,255,.6);margin-top:.6rem;font-weight:500}
+.hchips{display:flex;gap:8px;justify-content:center;margin-top:1.4rem;flex-wrap:wrap}
+.hchip{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:20px;padding:5px 13px;font-size:.71rem;font-weight:600;color:rgba(255,255,255,.78)}
+.hbot{position:relative;z-index:2;background:var(--red);padding:9px 1.5rem;text-align:center;font-size:.76rem;font-weight:700;color:rgba(255,255,255,.92);letter-spacing:.3px}
 
-/* MAIN */
-main { max-width: 700px; margin: 0 auto; padding: 2rem 1rem 9rem; }
+/* ── MAIN ── */
+main{max-width:700px;margin:0 auto;padding:2rem 1rem 9rem}
+.sec-head{display:flex;align-items:center;gap:10px;margin-bottom:1.4rem}
+.sec-line{flex:1;height:1px;background:var(--border)}
+.sec-lbl{font-size:.68rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
 
-/* SECTION HEAD */
-.sec-head { display: flex; align-items: center; gap: 10px; margin-bottom: 1.4rem; }
-.sec-line { flex: 1; height: 1px; background: var(--border); }
-.sec-lbl { font-size: 0.68rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+/* ── MENU GRID ── */
+.menu-grid{display:flex;flex-direction:column;border-radius:18px;overflow:hidden;border:1px solid var(--border);box-shadow:0 4px 28px var(--shadow);margin-bottom:2.5rem}
+.menu-card{background:var(--surface);border-bottom:1px solid var(--border);transition:background .15s}
+.menu-card:last-child{border-bottom:none}
+.menu-card:hover{background:#FFFCFA}
 
-/* MENU GRID */
-.menu-grid {
-  display: flex; flex-direction: column; gap: 0;
-  margin-bottom: 2.5rem;
-  border-radius: 18px; overflow: hidden;
-  border: 1px solid var(--border);
-  box-shadow: 0 4px 28px var(--shadow);
-}
-.menu-card { background: var(--surface); border-bottom: 1px solid var(--border); transition: background 0.15s; }
-.menu-card:last-child { border-bottom: none; }
-.menu-card:hover { background: #FFFCFA; }
+.card-top{display:flex;align-items:flex-start;gap:14px;padding:16px 18px 14px}
+.card-num{width:24px;height:24px;border-radius:7px;background:var(--red-l);color:var(--red);font-size:.68rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.card-body{flex:1;min-width:0}
+.card-name-row{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap}
+.card-name{font-weight:700;font-size:.92rem;line-height:1.3}
+.card-w{font-size:.68rem;font-weight:600;color:var(--muted);background:var(--border);border-radius:5px;padding:1px 7px;white-space:nowrap}
+.card-desc{font-size:.75rem;color:var(--muted);margin-top:3px;line-height:1.5}
+.card-price{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--red);white-space:nowrap;flex-shrink:0;align-self:center}
 
-.card-top { display: flex; align-items: flex-start; gap: 14px; padding: 16px 18px 14px; }
-.card-num {
-  width: 24px; height: 24px; border-radius: 7px;
-  background: var(--red-light); color: var(--red);
-  font-size: 0.68rem; font-weight: 800;
-  display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;
-}
-.card-body { flex: 1; min-width: 0; }
-.card-name-row { display: flex; align-items: baseline; gap: 7px; flex-wrap: wrap; }
-.card-name { font-weight: 700; font-size: 0.92rem; line-height: 1.3; }
-.card-weight {
-  font-size: 0.68rem; font-weight: 600; color: var(--muted);
-  background: var(--border); border-radius: 5px; padding: 1px 7px; white-space: nowrap;
-}
-.card-desc { font-size: 0.75rem; color: var(--muted); margin-top: 3px; line-height: 1.5; }
-.card-price { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: var(--red); white-space: nowrap; flex-shrink: 0; align-self: center; }
+/* ── OPTIONS ── */
+.card-opts{padding:0 18px 14px;display:flex;flex-direction:column;gap:12px}
+.opt-block{}
+.opt-lbl{font-size:.67rem;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:7px;display:flex;align-items:center;gap:5px}
+.req{color:var(--red)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1.5px solid var(--border);background:var(--surface);border-radius:9px;padding:5px 13px;font-size:.74rem;font-weight:600;cursor:pointer;transition:all .14s;font-family:'Plus Jakarta Sans',sans-serif;color:var(--text);outline:none}
+.chip:hover{border-color:var(--red);color:var(--red)}
+.chip.on{background:var(--red);border-color:var(--red);color:#fff;font-weight:700}
 
-/* OPTIONS */
-.card-opts { padding: 0 18px 14px; display: flex; flex-direction: column; gap: 12px; }
-.opt-block {}
-.opt-lbl {
-  font-size: 0.67rem; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase;
-  color: var(--muted); margin-bottom: 7px; display: flex; align-items: center; gap: 5px;
-}
-.req { color: var(--red); }
-.chips { display: flex; flex-wrap: wrap; gap: 6px; }
-.chip {
-  border: 1.5px solid var(--border); background: var(--surface);
-  border-radius: 9px; padding: 5px 13px;
-  font-size: 0.74rem; font-weight: 600; cursor: pointer;
-  transition: all 0.14s; font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text); outline: none;
-}
-.chip:hover { border-color: var(--red); color: var(--red); }
-.chip.on { background: var(--red); border-color: var(--red); color: white; font-weight: 700; }
+/* level pedas */
+.level-row{display:flex;gap:5px}
+.lv-chip{flex:1;border:1.5px solid var(--border);background:var(--surface);border-radius:9px;padding:6px 3px;font-size:.7rem;font-weight:700;cursor:pointer;text-align:center;transition:all .14s;font-family:'Plus Jakarta Sans',sans-serif;color:var(--text);display:flex;flex-direction:column;align-items:center;gap:2px;outline:none}
+.lv-chip:hover{border-color:var(--red)}
+.lv-chip.on{background:var(--red);border-color:var(--red);color:#fff}
+.lv-sub{font-size:.58rem;font-weight:500;color:var(--muted)}
+.lv-chip.on .lv-sub{color:rgba(255,255,255,.8)}
 
-/* LEVEL PEDAS */
-.level-row { display: flex; gap: 5px; }
-.lv-chip {
-  flex: 1; border: 1.5px solid var(--border); background: var(--surface);
-  border-radius: 9px; padding: 6px 3px;
-  font-size: 0.7rem; font-weight: 700; cursor: pointer; text-align: center;
-  transition: all 0.14s; font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text);
-  display: flex; flex-direction: column; align-items: center; gap: 2px; outline: none;
-}
-.lv-chip:hover { border-color: var(--red); }
-.lv-chip.on { background: var(--red); border-color: var(--red); color: white; }
-.lv-sub { font-size: 0.58rem; font-weight: 500; color: var(--muted); }
-.lv-chip.on .lv-sub { color: rgba(255,255,255,0.8); }
+/* ── PAKET LAUK ── */
+.lauk-slots{display:flex;flex-direction:column;gap:10px}
+.lauk-slot{border:1.5px solid var(--border);border-radius:13px;overflow:hidden}
+.lauk-slot-head{background:var(--bg);padding:7px 12px;font-size:.68rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:7px}
+.slot-dot{width:18px;height:18px;border-radius:6px;background:var(--red);color:#fff;font-size:.62rem;font-weight:800;display:flex;align-items:center;justify-content:center}
+.lauk-slot-body{padding:10px 12px;display:flex;flex-direction:column;gap:8px}
+.lauk-chips{display:flex;flex-wrap:wrap;gap:6px}
+.lauk-chip{border:1.5px solid var(--border);background:var(--surface);border-radius:9px;padding:6px 11px;font-size:.74rem;font-weight:600;cursor:pointer;transition:all .14s;font-family:'Plus Jakarta Sans',sans-serif;color:var(--text);display:flex;align-items:center;gap:5px;outline:none}
+.lauk-chip:hover{border-color:var(--red);color:var(--red)}
+.lauk-chip.on{background:var(--red-l);border-color:var(--red);color:var(--red);font-weight:700}
+.lauk-sub{display:none;flex-direction:column;gap:8px}
+.lauk-sub.show{display:flex}
+.lauk-sub-inner{background:var(--bg);border:1px dashed var(--border);border-radius:9px;padding:9px 10px;display:flex;flex-direction:column;gap:8px}
 
-/* PAKET LAUK */
-.lauk-slots { display: flex; flex-direction: column; gap: 10px; }
-.lauk-slot { border: 1.5px solid var(--border); border-radius: 13px; overflow: hidden; }
-.lauk-slot-head {
-  background: var(--bg); padding: 7px 12px;
-  font-size: 0.68rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: var(--muted);
-  display: flex; align-items: center; gap: 7px;
-}
-.slot-dot {
-  width: 18px; height: 18px; border-radius: 6px;
-  background: var(--red); color: white;
-  font-size: 0.62rem; font-weight: 800;
-  display: flex; align-items: center; justify-content: center;
-}
-.lauk-slot-body { padding: 10px 12px; display: flex; flex-direction: column; gap: 8px; }
-.lauk-chips { display: flex; flex-wrap: wrap; gap: 6px; }
-.lauk-chip {
-  border: 1.5px solid var(--border); background: var(--surface);
-  border-radius: 9px; padding: 6px 11px;
-  font-size: 0.74rem; font-weight: 600; cursor: pointer;
-  transition: all 0.14s; font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text);
-  display: flex; align-items: center; gap: 5px; outline: none;
-}
-.lauk-chip:hover { border-color: var(--red); color: var(--red); }
-.lauk-chip.on { background: var(--red-light); border-color: var(--red); color: var(--red); font-weight: 700; }
-.lauk-sub { display: none; flex-direction: column; gap: 8px; }
-.lauk-sub.show { display: flex; }
-.lauk-sub-inner {
-  background: var(--bg); border: 1px dashed var(--border);
-  border-radius: 9px; padding: 9px 10px;
-  display: flex; flex-direction: column; gap: 8px;
-}
+/* ── CARD FOOTER ── */
+.card-foot{padding:10px 18px 16px;display:flex;align-items:center;gap:10px}
+.qty-pill{display:flex;align-items:center;border:1.5px solid var(--border);border-radius:30px;overflow:hidden;background:var(--surface)}
+.qty-btn{background:none;border:none;width:34px;height:34px;cursor:pointer;font-size:1rem;font-weight:700;color:var(--red);display:flex;align-items:center;justify-content:center;transition:background .1s}
+.qty-btn:hover{background:var(--red-l)}
+.qty-n{font-weight:800;font-size:.88rem;min-width:28px;text-align:center}
+.add-btn{flex:1;background:var(--red);color:#fff;border:none;border-radius:10px;padding:9px 16px;font-weight:700;font-size:.84rem;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:background .15s,transform .1s;letter-spacing:.1px}
+.add-btn:hover{background:var(--red-d)}
+.add-btn:active{transform:scale(.97)}
+.add-btn.ok{background:var(--green)}
 
-/* CARD FOOTER */
-.card-foot { padding: 10px 18px 16px; display: flex; align-items: center; gap: 10px; }
-.qty-pill {
-  display: flex; align-items: center;
-  border: 1.5px solid var(--border); border-radius: 30px; overflow: hidden; background: var(--surface);
-}
-.qty-btn {
-  background: none; border: none; width: 34px; height: 34px;
-  cursor: pointer; font-size: 1rem; font-weight: 700; color: var(--red);
-  display: flex; align-items: center; justify-content: center; transition: background 0.1s;
-}
-.qty-btn:hover { background: var(--red-light); }
-.qty-n { font-weight: 800; font-size: 0.88rem; min-width: 28px; text-align: center; }
-.add-btn {
-  flex: 1; background: var(--red); color: white;
-  border: none; border-radius: 10px; padding: 9px 16px;
-  font-weight: 700; font-size: 0.84rem; cursor: pointer;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  transition: background 0.15s, transform 0.1s; letter-spacing: 0.1px;
-}
-.add-btn:hover { background: var(--red-dark); }
-.add-btn:active { transform: scale(0.97); }
-.add-btn.ok { background: var(--green); }
+/* ── CART BAR ── */
+.cart-bar{position:fixed;bottom:0;left:0;right:0;z-index:100;display:flex;justify-content:center}
+.cart-inner{width:100%;max-width:700px;background:var(--text);border-top:1px solid rgba(255,255,255,.08);padding:13px 1.2rem;box-shadow:0 -8px 32px rgba(0,0,0,.2)}
+.cart-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.cart-ico{position:relative}
+.cart-badge{position:absolute;top:-5px;right:-5px;background:var(--gold);color:#3A2000;font-size:.58rem;font-weight:800;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.cart-meta{flex:1}
+.cart-ct{color:rgba(255,255,255,.55);font-size:.73rem;font-weight:500}
+.cart-tot{color:#fff;font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700}
+.checkout-btn{width:100%;background:var(--red);color:#fff;border:none;border-radius:12px;padding:13px;font-weight:700;font-size:.93rem;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:background .15s}
+.checkout-btn:hover{background:var(--red-d)}
 
-/* CART BAR */
-.cart-bar {
-  position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
-  display: flex; justify-content: center;
-}
-.cart-inner {
-  width: 100%; max-width: 700px;
-  background: var(--text); border-top: 1px solid rgba(255,255,255,0.08);
-  padding: 13px 1.2rem; box-shadow: 0 -8px 32px rgba(0,0,0,0.2);
-}
-.cart-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-.cart-ico-wrap { position: relative; }
-.cart-badge {
-  position: absolute; top: -5px; right: -5px;
-  background: var(--gold); color: #3A2000;
-  font-size: 0.58rem; font-weight: 800;
-  width: 16px; height: 16px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-}
-.cart-meta { flex: 1; }
-.cart-ct { color: rgba(255,255,255,0.55); font-size: 0.73rem; font-weight: 500; }
-.cart-tot { color: white; font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; }
-.checkout-btn {
-  width: 100%; background: var(--red); color: white;
-  border: none; border-radius: 12px; padding: 13px;
-  font-weight: 700; font-size: 0.93rem; cursor: pointer;
-  font-family: 'Plus Jakarta Sans', sans-serif; transition: background 0.15s;
-}
-.checkout-btn:hover { background: var(--red-dark); }
+/* ── MODAL ── */
+.modal-overlay{position:fixed;inset:0;background:rgba(10,5,2,.65);z-index:200;display:flex;align-items:flex-end;justify-content:center;backdrop-filter:blur(3px)}
+.modal{background:var(--bg);border-radius:24px 24px 0 0;width:100%;max-width:700px;max-height:93vh;overflow-y:auto;padding:0 0 2rem}
+.modal-bar{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 1.2rem .9rem;position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--border);z-index:2}
+.modal-ttl{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700}
+.modal-x{background:var(--border);border:none;border-radius:50%;width:30px;height:30px;cursor:pointer;font-size:.85rem;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:background .1s}
+.modal-x:hover{background:#DDD0C8}
+.modal-body{padding:1.2rem}
 
-/* MODAL */
-.modal-overlay {
-  position: fixed; inset: 0; background: rgba(10,5,2,0.65);
-  z-index: 200; display: flex; align-items: flex-end; justify-content: center;
-  backdrop-filter: blur(3px);
-}
-.modal {
-  background: var(--bg); border-radius: 24px 24px 0 0;
-  width: 100%; max-width: 700px; max-height: 93vh; overflow-y: auto; padding: 0 0 2rem;
-}
-.modal-bar {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 1.2rem 1.2rem 0.9rem;
-  position: sticky; top: 0; background: var(--bg);
-  border-bottom: 1px solid var(--border); z-index: 2;
-}
-.modal-ttl { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; }
-.modal-x {
-  background: var(--border); border: none; border-radius: 50%;
-  width: 30px; height: 30px; cursor: pointer; font-size: 0.85rem;
-  display: flex; align-items: center; justify-content: center; color: var(--muted); transition: background 0.1s;
-}
-.modal-x:hover { background: #DDD0C8; }
-.modal-body { padding: 1.2rem; }
+/* cart items in modal */
+.ci{background:var(--surface);border:1px solid var(--border);border-radius:13px;padding:12px 14px;margin-bottom:8px;display:flex;align-items:flex-start;gap:11px}
+.ci-emoji{font-size:1.25rem;flex-shrink:0;margin-top:1px}
+.ci-body{flex:1;min-width:0}
+.ci-name{font-weight:700;font-size:.84rem}
+.ci-sub{font-size:.72rem;color:var(--muted);margin-top:2px;line-height:1.5}
+.ci-right{display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex-shrink:0}
+.ci-price{font-weight:700;font-size:.87rem;color:var(--red);font-family:'Playfair Display',serif}
+.rm-btn{background:none;border:none;cursor:pointer;color:var(--border);font-size:.82rem;transition:color .1s;padding:2px}
+.rm-btn:hover{color:var(--red)}
+.mdivider{height:1px;background:var(--border);margin:1.2rem 0}
 
-/* CART ITEMS IN MODAL */
-.ci {
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: 13px; padding: 12px 14px; margin-bottom: 8px;
-  display: flex; align-items: flex-start; gap: 11px;
-}
-.ci-emoji { font-size: 1.25rem; flex-shrink: 0; margin-top: 1px; }
-.ci-body { flex: 1; min-width: 0; }
-.ci-name { font-weight: 700; font-size: 0.84rem; }
-.ci-sub { font-size: 0.72rem; color: var(--muted); margin-top: 2px; line-height: 1.5; }
-.ci-right { display: flex; flex-direction: column; align-items: flex-end; gap: 5px; flex-shrink: 0; }
-.ci-price { font-weight: 700; font-size: 0.87rem; color: var(--red); font-family: 'Playfair Display', serif; }
-.rm-btn {
-  background: none; border: none; cursor: pointer;
-  color: var(--border); font-size: 0.82rem; transition: color 0.1s; padding: 2px;
-}
-.rm-btn:hover { color: var(--red); }
+/* form */
+.form-sec-ttl{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;margin-bottom:1rem}
+.fg{margin-bottom:1rem}
+.fl{display:block;font-size:.69rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.fi{width:100%;border:1.5px solid var(--border);background:var(--surface);border-radius:11px;padding:11px 14px;font-size:.91rem;font-family:'Plus Jakarta Sans',sans-serif;color:var(--text);outline:none;transition:border-color .15s,box-shadow .15s}
+.fi:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(200,48,10,.08)}
+.fi.err{border-color:var(--red);background:#FEF6F4}
+.fta{width:100%;border:1.5px solid var(--border);background:var(--surface);border-radius:11px;padding:11px 14px;font-size:.89rem;font-family:'Plus Jakarta Sans',sans-serif;color:var(--text);outline:none;resize:vertical;min-height:70px;transition:border-color .15s,box-shadow .15s}
+.fta:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(200,48,10,.08)}
+.ferr{font-size:.71rem;color:var(--red);font-weight:600;margin-top:4px;display:none}
+.ferr.show{display:block}
 
-.mdivider { height: 1px; background: var(--border); margin: 1.2rem 0; }
+/* maps */
+.maps-wrap{position:relative}
+.maps-search-box{width:100%;border:1.5px solid var(--border);background:var(--surface);border-radius:11px;padding:11px 14px 11px 40px;font-size:.91rem;font-family:'Plus Jakarta Sans',sans-serif;color:var(--text);outline:none;transition:border-color .15s,box-shadow .15s}
+.maps-search-box:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(200,48,10,.08)}
+.maps-pin-icon{position:absolute;left:13px;top:50%;transform:translateY(-50%);font-size:1rem;pointer-events:none}
+.maps-hint{background:#EEF4FF;border:1px solid #C5D8FF;border-radius:9px;padding:9px 12px;font-size:.74rem;color:#1A4A99;font-weight:600;line-height:1.5;margin-bottom:8px}
+.loc-prev{background:var(--green-l);border:1px solid #A8D5BB;border-radius:9px;padding:9px 12px;font-size:.79rem;color:var(--green);font-weight:600;margin-bottom:8px;display:none;line-height:1.5}
 
-/* FORM */
-.form-sec-ttl { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; margin-bottom: 1rem; }
-.fg { margin-bottom: 1rem; }
-.fl {
-  display: block; font-size: 0.69rem; font-weight: 800;
-  letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-bottom: 6px;
-}
-.fi {
-  width: 100%; border: 1.5px solid var(--border); background: var(--surface);
-  border-radius: 11px; padding: 11px 14px; font-size: 0.91rem;
-  font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text); outline: none;
-  transition: border-color 0.15s, box-shadow 0.15s;
-}
-.fi:focus { border-color: var(--red); box-shadow: 0 0 0 3px rgba(200,48,10,0.08); }
-.fi.err { border-color: var(--red); background: #FEF6F4; }
-.fta {
-  width: 100%; border: 1.5px solid var(--border); background: var(--surface);
-  border-radius: 11px; padding: 11px 14px; font-size: 0.89rem;
-  font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text); outline: none;
-  resize: vertical; min-height: 80px; transition: border-color 0.15s, box-shadow 0.15s;
-}
-.fta:focus { border-color: var(--red); box-shadow: 0 0 0 3px rgba(200,48,10,0.08); }
-.ferr { font-size: 0.71rem; color: var(--red); font-weight: 600; margin-top: 4px; display: none; }
-.ferr.show { display: block; }
+/* order total */
+.order-total{background:var(--text);color:#fff;border-radius:14px;padding:16px 18px;display:flex;align-items:center;justify-content:space-between;margin:1.4rem 0 1rem}
+.ot-label{font-size:.8rem;font-weight:600;opacity:.65}
+.ot-amount{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:#F0C060}
+.send-btn{width:100%;background:var(--red);color:#fff;border:none;border-radius:12px;padding:14px;font-weight:700;font-size:1rem;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:background .15s,transform .1s}
+.send-btn:hover:not(:disabled){background:var(--red-d)}
+.send-btn:active{transform:scale(.98)}
+.send-btn:disabled{opacity:.5;cursor:not-allowed}
 
-.maps-hint {
-  background: #EEF4FF; border: 1px solid #C5D8FF;
-  border-radius: 9px; padding: 9px 12px;
-  font-size: 0.75rem; color: #1A4A99; font-weight: 600; line-height: 1.5; margin-bottom: 8px;
-}
-.maps-btn {
-  width: 100%; background: #1A73E8; color: white;
-  border: none; border-radius: 11px; padding: 11px 14px;
-  font-weight: 700; font-size: 0.87rem; cursor: pointer;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  display: flex; align-items: center; justify-content: center; gap: 8px;
-  transition: background 0.15s; margin-bottom: 8px;
-}
-.maps-btn:hover { background: #1558C0; }
-.loc-prev {
-  background: var(--green-light); border: 1px solid #A8D5BB;
-  border-radius: 9px; padding: 9px 12px;
-  font-size: 0.79rem; color: var(--green); font-weight: 600; margin-bottom: 8px; display: none;
-}
+/* success */
+.success-wrap{text-align:center;padding:2.5rem 1rem}
+.success-circ{width:72px;height:72px;border-radius:50%;background:var(--green-l);border:2px solid #A8D5BB;display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 1rem}
+.success-wrap h3{font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:.4rem}
+.success-wrap p{font-size:.84rem;color:var(--muted);font-weight:500;line-height:1.7}
 
-/* ORDER TOTAL */
-.order-total {
-  background: var(--text); color: white;
-  border-radius: 14px; padding: 16px 18px;
-  display: flex; align-items: center; justify-content: space-between;
-  margin: 1.4rem 0 1rem;
-}
-.ot-label { font-size: 0.8rem; font-weight: 600; opacity: 0.65; }
-.ot-amount { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: #F0C060; }
-.send-btn {
-  width: 100%; background: var(--red); color: white;
-  border: none; border-radius: 12px; padding: 14px;
-  font-weight: 700; font-size: 1rem; cursor: pointer;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  transition: background 0.15s, transform 0.1s;
-}
-.send-btn:hover:not(:disabled) { background: var(--red-dark); }
-.send-btn:active { transform: scale(0.98); }
-.send-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+/* empty cart */
+.empty-cart{text-align:center;padding:2.5rem 1rem}
+.empty-cart .ei{font-size:2.5rem;opacity:.35}
+.empty-cart p{color:var(--muted);font-size:.84rem;font-weight:600;margin-top:.5rem}
 
-/* SUCCESS */
-.success-wrap { text-align: center; padding: 2.5rem 1rem; }
-.success-circ {
-  width: 72px; height: 72px; border-radius: 50%;
-  background: var(--green-light); border: 2px solid #A8D5BB;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 2rem; margin: 0 auto 1rem;
-}
-.success-wrap h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 0.4rem; }
-.success-wrap p { font-size: 0.84rem; color: var(--muted); font-weight: 500; line-height: 1.7; }
+.hidden{display:none!important}
 
-/* EMPTY */
-.empty-cart { text-align: center; padding: 2.5rem 1rem; }
-.empty-cart .ei { font-size: 2.5rem; opacity: 0.35; }
-.empty-cart p { color: var(--muted); font-size: 0.84rem; font-weight: 600; margin-top: 0.5rem; }
-
-.hidden { display: none !important; }
+/* pac-container (Google autocomplete dropdown) z-index fix */
+.pac-container{z-index:9999!important}
 </style>
 </head>
 <body>
 
 <header>
-  <div class="header-decor"></div>
-  <div class="header-inner">
-    <div class="header-pill">✦ Masakan Rumahan Jakarta ✦</div>
+  <div class="hd"></div>
+  <div class="hi">
+    <div class="hpill">✦ Masakan Rumahan Jakarta ✦</div>
     <h1>Lawuk Pawuk<br><em>Jakarta</em></h1>
     <p>Dimasak dengan bahan segar & cinta — enak, sehat, nikmat!</p>
-    <div class="header-chips">
-      <span class="header-chip">🌿 Bahan Segar</span>
-      <span class="header-chip">🏠 Masakan Rumahan</span>
-      <span class="header-chip">💛 Harga Bersahabat</span>
+    <div class="hchips">
+      <span class="hchip">🌿 Bahan Segar</span>
+      <span class="hchip">🏠 Masakan Rumahan</span>
+      <span class="hchip">💛 Harga Bersahabat</span>
     </div>
   </div>
-  <div class="header-bottom">📦 Pesan sekarang sebelum kehabisan!</div>
+  <div class="hbot">📦 Pesan sekarang sebelum kehabisan!</div>
 </header>
 
 <main>
@@ -374,8 +204,8 @@ main { max-width: 700px; margin: 0 auto; padding: 2rem 1rem 9rem; }
 <div class="cart-bar" id="cartBar" style="display:none;">
   <div class="cart-inner">
     <div class="cart-row">
-      <div class="cart-ico-wrap">
-        <span style="font-size:1.55rem;">🛒</span>
+      <div class="cart-ico">
+        <span style="font-size:1.55rem">🛒</span>
         <span class="cart-badge" id="cartBadge">0</span>
       </div>
       <div class="cart-meta">
@@ -395,6 +225,7 @@ main { max-width: 700px; margin: 0 auto; padding: 2rem 1rem 9rem; }
       <button class="modal-x" onclick="closeModal()">✕</button>
     </div>
     <div class="modal-body">
+
       <div id="successView" class="hidden">
         <div class="success-wrap">
           <div class="success-circ">🎉</div>
@@ -402,35 +233,42 @@ main { max-width: 700px; margin: 0 auto; padding: 2rem 1rem 9rem; }
           <p>Pesananmu sudah tercatat dengan baik.<br>Kami akan segera konfirmasi via WhatsApp.</p>
         </div>
       </div>
+
       <div id="orderView">
         <div id="cartItems"></div>
         <div class="mdivider"></div>
+
         <div class="form-sec-ttl">Data Pemesan</div>
+
         <div class="fg">
           <label class="fl">Nama Lengkap <span class="req">*</span></label>
           <input type="text" class="fi" id="fName" placeholder="Nama kamu...">
           <div class="ferr" id="eN">Nama wajib diisi.</div>
         </div>
+
         <div class="fg">
           <label class="fl">Nomor WhatsApp <span class="req">*</span></label>
           <input type="tel" class="fi" id="fPhone" placeholder="08xxxxxxxxxx">
           <div class="ferr" id="eP">Nomor WhatsApp wajib diisi.</div>
         </div>
+
         <div class="fg">
           <label class="fl">Alamat Pengiriman <span class="req">*</span></label>
-          <div class="maps-hint">📍 Gunakan tombol di bawah untuk memilih lokasi dari Google Maps agar alamat lebih akurat.</div>
-          <button class="maps-btn" onclick="openMaps()">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="white"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg>
-            Pilih Lokasi via Google Maps
-          </button>
+          <div class="maps-hint">📍 Ketik nama jalan atau lokasi — pilih dari daftar yang muncul untuk alamat akurat.</div>
+          <div class="maps-wrap">
+            <span class="maps-pin-icon">📍</span>
+            <input type="text" class="maps-search-box" id="addressSearch" placeholder="Cari alamat atau nama lokasi...">
+          </div>
           <div class="loc-prev" id="locPrev"></div>
-          <textarea class="fta" id="fAddress" placeholder="Atau ketik alamat: jalan, nomor, RT/RW, kelurahan, kecamatan, kota..."></textarea>
+          <input type="hidden" id="fAddress">
           <div class="ferr" id="eA">Alamat wajib diisi.</div>
         </div>
+
         <div class="fg">
           <label class="fl">Catatan Tambahan</label>
-          <textarea class="fta" id="fNotes" placeholder="Ada permintaan khusus?"></textarea>
+          <textarea class="fta" id="fNotes" placeholder="Ada permintaan khusus? Misal: titik drop, patokan rumah, dll."></textarea>
         </div>
+
         <div class="order-total">
           <div><div class="ot-label">Total Pembayaran</div><div class="ot-amount" id="mTotal">Rp 0</div></div>
           <div style="font-size:1.5rem">🧾</div>
@@ -442,105 +280,188 @@ main { max-width: 700px; margin: 0 auto; padding: 2rem 1rem 9rem; }
 </div>
 
 <script>
-// ── DATA ──
+// ─────────────────────────────────────────────
+// CONFIG — ganti setelah deploy Apps Script
+// ─────────────────────────────────────────────
+const APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
+
+// ─────────────────────────────────────────────
+// DATA
+// ─────────────────────────────────────────────
 const SAMBAL = ['Sambal Bawang','Sambal Matah','Sambal Terasi'];
 const LEVELS = [
-  {n:1, icon:'🌶️',       lbl:'Lv.1'},
-  {n:2, icon:'🌶️🌶️',    lbl:'Lv.2'},
-  {n:3, icon:'🌶️🌶️🌶️', lbl:'Lv.3'},
-  {n:4, icon:'🔥🔥',      lbl:'Lv.4'},
-  {n:5, icon:'💀',        lbl:'Lv.5'},
-];
-const LAUKS = [
-  {id:'tongkol', e:'🐟', n:'Tongkol Kemangi', sambal:false},
-  {id:'ayam',    e:'🍗', n:'Ayam Suwir',      sambal:true },
-  {id:'tempe',   e:'🫘', n:'Tempe Teri',      sambal:false},
-  {id:'cumi',    e:'🦑', n:'Cumi Pedas',      sambal:true },
-];
-const MENU = [
-  {id:1, e:'🐟', n:'Tongkol Kemangi A La Carte',            w:'300g', p:30000, desc:'Ikan tongkol dimasak dengan kemangi, wangi & nikmat!',              sambal:false, pedas:false, paket:false},
-  {id:2, e:'🐟', n:'Tongkol Kemangi + Nasi',                w:'',     p:18000, desc:'Tongkol kemangi lengkap dengan nasi putih hangat.',                 sambal:false, pedas:false, paket:false},
-  {id:3, e:'🍗', n:'Ayam Suwir A La Carte',                 w:'300g', p:30000, desc:'Ayam rebus suwir pilihan, lembut & gurih. Tinggi protein!',         sambal:true,  pedas:true,  paket:false},
-  {id:4, e:'🍗', n:'Ayam Suwir + Nasi',                     w:'',     p:18000, desc:'Ayam suwir dengan pilihan sambal + nasi putih.',                    sambal:true,  pedas:true,  paket:false},
-  {id:5, e:'🫘', n:'Tempe Teri A La Carte',                 w:'300g', p:30000, desc:'Perpaduan tempe renyah dan teri gurih, nagih banget!',              sambal:false, pedas:false, paket:false},
-  {id:6, e:'🦑', n:'Cumi Pedas A La Carte',                 w:'300g', p:35000, desc:'Cumi empuk dimasak pedas menggoda, bikin nagih!',                  sambal:true,  pedas:true,  paket:false},
-  {id:7, e:'🦑', n:'Nasi + Cumi Pedas',                     w:'',     p:18000, desc:'Cumi pedas dengan pilihan sambal + nasi putih.',                    sambal:true,  pedas:true,  paket:false},
-  {id:8, e:'🍱', n:'Paket Nasi + 2 Lauk + Telur Mata Sapi', w:'',     p:25000, desc:'Nasi putih + 2 lauk pilihan + telur mata sapi. Super lengkap!',    sambal:false, pedas:false, paket:true },
-  {id:9, e:'🌶️', n:'Add On Sambal',                         w:'',     p:5000,  desc:'Tambah porsi sambal favoritmu!',                                   sambal:true,  pedas:false, paket:false},
+  {n:1,icon:'🌶️',       lbl:'Lv.1'},
+  {n:2,icon:'🌶️🌶️',    lbl:'Lv.2'},
+  {n:3,icon:'🌶️🌶️🌶️', lbl:'Lv.3'},
+  {n:4,icon:'🔥🔥',      lbl:'Lv.4'},
+  {n:5,icon:'💀',        lbl:'Lv.5'},
 ];
 
-// ── STATE ──
+// hasSambal = apakah lauk ini punya opsi sambal di paket
+// hasSpice  = apakah lauk ini punya opsi pedas di paket
+const LAUKS = [
+  {id:'tongkol', e:'🐟', n:'Tongkol Kemangi', hasSambal:true,  hasSpice:true },
+  {id:'ayam',    e:'🍗', n:'Ayam Suwir',      hasSambal:true,  hasSpice:true },
+  {id:'tempe',   e:'🫘', n:'Tempe Teri',      hasSambal:false, hasSpice:false},
+  {id:'cumi',    e:'🦑', n:'Cumi Pedas',      hasSambal:true,  hasSpice:true },
+];
+
+// sambal: apakah menu ini punya opsi sambal standalone
+// pedas:  apakah menu ini punya opsi level pedas standalone
+const MENU = [
+  {id:1, e:'🐟', n:'Tongkol Kemangi A La Carte',              w:'300g', p:30000, desc:'Ikan tongkol dimasak dengan kemangi, wangi & nikmat!',             sambal:true,  pedas:true,  paket:false},
+  {id:2, e:'🐟', n:'Tongkol Kemangi + Nasi',                  w:'',     p:18000, desc:'Tongkol kemangi lengkap dengan nasi putih hangat.',                sambal:true,  pedas:true,  paket:false},
+  {id:3, e:'🍗', n:'Ayam Suwir A La Carte',                   w:'300g', p:30000, desc:'Ayam rebus suwir pilihan, lembut & gurih. Tinggi protein!',        sambal:true,  pedas:true,  paket:false},
+  {id:4, e:'🍗', n:'Ayam Suwir + Nasi',                       w:'',     p:18000, desc:'Ayam suwir dengan pilihan sambal + nasi putih.',                   sambal:true,  pedas:true,  paket:false},
+  {id:5, e:'🫘', n:'Tempe Teri A La Carte',                   w:'300g', p:30000, desc:'Perpaduan tempe renyah dan teri gurih, nagih banget!',             sambal:false, pedas:false, paket:false},
+  {id:6, e:'🦑', n:'Cumi Pedas A La Carte',                   w:'300g', p:35000, desc:'Cumi empuk dimasak pedas menggoda, bikin nagih!',                 sambal:true,  pedas:true,  paket:false},
+  {id:7, e:'🦑', n:'Nasi + Cumi Pedas',                       w:'',     p:18000, desc:'Cumi pedas dengan pilihan sambal + nasi putih.',                   sambal:true,  pedas:true,  paket:false},
+  {id:8, e:'🍱', n:'Paket Nasi + 2 Lauk + Telur Mata Sapi',  w:'',     p:25000, desc:'Nasi putih + 2 lauk pilihan + telur mata sapi. Super lengkap!',   sambal:false, pedas:false, paket:true },
+  {id:9, e:'🌶️', n:'Add On Sambal',                           w:'',     p:5000,  desc:'Tambah porsi sambal favoritmu!',                                  sambal:true,  pedas:false, paket:false},
+];
+
+// ─────────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────────
 let cart = [];
-let state = {};
+let ST = {};
+
 function st(id) {
-  if (!state[id]) {
+  if (!ST[id]) {
     const m = MENU.find(x => x.id === id);
-    state[id] = {
+    ST[id] = {
       qty: 1,
       sambal: null,
       pedas: m.pedas ? 1 : null,
-      lauk: m.paket ? {1:{id:null,sambal:null,pedas:1}, 2:{id:null,sambal:null,pedas:1}} : null
+      lauk: m.paket
+        ? { 1:{id:null,sambal:null,pedas:1}, 2:{id:null,sambal:null,pedas:1} }
+        : null
     };
   }
-  return state[id];
+  return ST[id];
 }
 
-// ── FORMAT ──
+// ─────────────────────────────────────────────
+// HELPERS
+// ─────────────────────────────────────────────
 function rp(n) { return 'Rp ' + n.toLocaleString('id-ID'); }
 
-// ── RENDER MENU ──
-function buildLevelRow(pfx, defaultLv) {
+function buildSambalChips(pfx) {
+  return '<div class="chips">' +
+    SAMBAL.map(s =>
+      '<button class="chip" id="' + pfx + s.replace(/\s/g,'_') + '" onclick="pickSambal(\'' + pfx + '\',\'' + s + '\')">' + s + '</button>'
+    ).join('') +
+  '</div>';
+}
+
+function buildLevelChips(pfx, defLv) {
   return '<div class="level-row">' +
     LEVELS.map(lv => {
-      const sel = lv.n === defaultLv ? ' on' : '';
-      return '<button class="lv-chip' + sel + '" id="' + pfx + lv.n + '" onclick="setLv(this,\'' + pfx + '\',' + lv.n + ')">' +
-        '<span>' + lv.icon + '</span><span class="lv-sub">' + lv.lbl + '</span>' +
-        '</button>';
+      const on = lv.n === (defLv||1) ? ' on' : '';
+      return '<button class="lv-chip' + on + '" id="' + pfx + lv.n + '" onclick="pickLv(\'' + pfx + '\',' + lv.n + ')">' +
+        '<span>' + lv.icon + '</span><span class="lv-sub">' + lv.lbl + '</span></button>';
     }).join('') +
   '</div>';
 }
-function buildSambalRow(pfx) {
-  return '<div class="chips">' +
-    SAMBAL.map(s => '<button class="chip" id="' + pfx + s.replace(/\s/g,'_') + '" onclick="setSambal(this,\'' + pfx + '\',\'' + s + '\')">' + s + '</button>').join('') +
-  '</div>';
+
+function pickSambal(pfx, val) {
+  SAMBAL.forEach(s => {
+    const b = document.getElementById(pfx + s.replace(/\s/g,'_'));
+    if (b) b.classList.toggle('on', s === val);
+  });
+  // Update state
+  applyPfxState(pfx, 'sambal', val);
 }
 
+function pickLv(pfx, n) {
+  LEVELS.forEach(lv => {
+    const b = document.getElementById(pfx + lv.n);
+    if (b) b.classList.toggle('on', lv.n === n);
+  });
+  applyPfxState(pfx, 'pedas', n);
+}
+
+function applyPfxState(pfx, key, val) {
+  // pfx patterns:
+  // standalone sambal: "sm{id}-"
+  // standalone pedas:  "lv{id}-"
+  // lauk sambal:       "lsm{id}-{slot}-"
+  // lauk pedas:        "llv{id}-{slot}-"
+  if (pfx.startsWith('sm')) {
+    const id = parseInt(pfx.replace('sm','').replace('-',''));
+    st(id).sambal = val;
+  } else if (pfx.startsWith('lv')) {
+    const id = parseInt(pfx.replace('lv','').replace('-',''));
+    st(id).pedas = val;
+  } else if (pfx.startsWith('lsm')) {
+    const parts = pfx.replace('lsm','').split('-');
+    const [id, slot] = [parseInt(parts[0]), parseInt(parts[1])];
+    st(id).lauk[slot].sambal = val;
+  } else if (pfx.startsWith('llv')) {
+    const parts = pfx.replace('llv','').split('-');
+    const [id, slot] = [parseInt(parts[0]), parseInt(parts[1])];
+    st(id).lauk[slot].pedas = val;
+  }
+}
+
+// ─────────────────────────────────────────────
+// RENDER MENU
+// ─────────────────────────────────────────────
 function renderMenu() {
   document.getElementById('menuGrid').innerHTML = MENU.map((m, idx) => {
     let opts = '';
 
+    // standalone sambal + pedas
     if (m.sambal || m.pedas) {
       opts += '<div class="card-opts">';
       if (m.sambal) {
-        opts += '<div class="opt-block"><div class="opt-lbl">Pilih Sambal <span class="req">*</span></div>' +
-          buildSambalRow('sb' + m.id + '-') + '</div>';
+        opts += '<div class="opt-block">' +
+          '<div class="opt-lbl">Pilih Sambal <span class="req">*</span></div>' +
+          buildSambalChips('sm' + m.id + '-') +
+          '</div>';
       }
       if (m.pedas) {
-        opts += '<div class="opt-block"><div class="opt-lbl">Level Pedas <span class="req">*</span></div>' +
-          buildLevelRow('lv' + m.id + '-', 1) + '</div>';
+        opts += '<div class="opt-block">' +
+          '<div class="opt-lbl">Level Pedas <span class="req">*</span></div>' +
+          buildLevelChips('lv' + m.id + '-', 1) +
+          '</div>';
       }
       opts += '</div>';
     }
 
+    // paket 2 lauk
     if (m.paket) {
-      opts += '<div class="card-opts"><div class="opt-block"><div class="opt-lbl">Pilih 2 Lauk <span class="req">*</span></div>';
-      opts += '<div class="lauk-slots">';
+      opts += '<div class="card-opts"><div class="opt-block">' +
+        '<div class="opt-lbl">Pilih 2 Lauk <span class="req">*</span></div>' +
+        '<div class="lauk-slots">';
+
       [1,2].forEach(slot => {
-        opts += '<div class="lauk-slot">';
-        opts += '<div class="lauk-slot-head"><span class="slot-dot">' + slot + '</span> Lauk ' + slot + '</div>';
-        opts += '<div class="lauk-slot-body">';
-        opts += '<div><div class="opt-lbl">Pilih Lauk <span class="req">*</span></div><div class="lauk-chips">';
+        opts += '<div class="lauk-slot">' +
+          '<div class="lauk-slot-head"><span class="slot-dot">' + slot + '</span> Lauk ' + slot + '</div>' +
+          '<div class="lauk-slot-body">' +
+          '<div><div class="opt-lbl">Pilih Lauk <span class="req">*</span></div>' +
+          '<div class="lauk-chips">';
+
         LAUKS.forEach(l => {
-          opts += '<button class="lauk-chip" id="lk' + m.id + '-' + slot + '-' + l.id + '" onclick="pickLauk(' + m.id + ',' + slot + ',\'' + l.id + '\',' + l.sambal + ')">' + l.e + ' ' + l.n + '</button>';
+          opts += '<button class="lauk-chip" id="lk' + m.id + '-' + slot + '-' + l.id + '" ' +
+            'onclick="pickLauk(' + m.id + ',' + slot + ',\'' + l.id + '\')">' +
+            l.e + ' ' + l.n + '</button>';
         });
+
         opts += '</div></div>';
-        opts += '<div class="lauk-sub" id="ls' + m.id + '-' + slot + '">';
-        opts += '<div class="lauk-sub-inner">';
-        opts += '<div class="opt-lbl">Pilih Sambal <span class="req">*</span></div>' + buildSambalRow('lsb' + m.id + '-' + slot + '-');
-        opts += '<div class="opt-lbl" style="margin-top:7px;">Level Pedas <span class="req">*</span></div>' + buildLevelRow('llv' + m.id + '-' + slot + '-', 1);
-        opts += '</div></div>';
+
+        // Collapsible sambal+pedas for this lauk slot (shown when lauk with sambal selected)
+        opts += '<div class="lauk-sub" id="ls' + m.id + '-' + slot + '">' +
+          '<div class="lauk-sub-inner">' +
+          '<div class="opt-lbl">Pilih Sambal <span class="req">*</span></div>' +
+          buildSambalChips('lsm' + m.id + '-' + slot + '-') +
+          '<div class="opt-lbl" style="margin-top:8px;">Level Pedas <span class="req">*</span></div>' +
+          buildLevelChips('llv' + m.id + '-' + slot + '-', 1) +
+          '</div></div>';
+
         opts += '</div></div>';
       });
+
       opts += '</div></div></div>';
     }
 
@@ -550,7 +471,7 @@ function renderMenu() {
         '<div class="card-body">' +
           '<div class="card-name-row">' +
             '<span class="card-name">' + m.e + ' ' + m.n + '</span>' +
-            (m.w ? '<span class="card-weight">' + m.w + '</span>' : '') +
+            (m.w ? '<span class="card-w">' + m.w + '</span>' : '') +
           '</div>' +
           '<div class="card-desc">' + m.desc + '</div>' +
         '</div>' +
@@ -569,77 +490,29 @@ function renderMenu() {
   }).join('');
 }
 
-// ── HELPERS FOR LEVEL / SAMBAL ROW ──
-function setLv(btn, pfx, n) {
-  LEVELS.forEach(lv => {
-    const b = document.getElementById(pfx + lv.n);
-    if (b) b.classList.toggle('on', lv.n === n);
-  });
-}
-function setSambal(btn, pfx, s) {
-  SAMBAL.forEach(sb => {
-    const b = document.getElementById(pfx + sb.replace(/\s/g,'_'));
-    if (b) b.classList.toggle('on', sb === s);
-  });
-}
-
-// ── INTERACTIONS ──
-function selectSambal(id, s) {
-  st(id).sambal = s;
-  setSambal(null, 'sb' + id + '-', s);
-}
-function selectPedas(id, n) {
-  st(id).pedas = n;
-  setLv(null, 'lv' + id + '-', n);
-}
-// override onclick to also update state
-document.addEventListener('click', function(e) {
-  // sambal chips (non-lauk)
-  const sc = e.target.closest('.chip');
-  if (sc) {
-    const id = sc.id;
-    // extract prefix and value
-    if (id && id.startsWith('sb')) {
-      const parts = id.replace('sb','').split('-');
-      const menuId = parseInt(parts[0]);
-      const sambalKey = parts[1].replace(/_/g,' ');
-      st(menuId).sambal = sambalKey;
-    }
-    if (id && id.startsWith('lsb')) {
-      const rest = id.replace('lsb','');
-      const [mId, slot, ...sv] = rest.split('-');
-      const sVal = sv.join('-').replace(/_/g,' ');
-      if (st(parseInt(mId)).lauk) st(parseInt(mId)).lauk[parseInt(slot)].sambal = sVal;
-    }
-  }
-  // level chips
-  const lc = e.target.closest('.lv-chip');
-  if (lc) {
-    const id = lc.id;
-    if (id && id.startsWith('lv') && !id.startsWith('llv')) {
-      const parts = id.replace('lv','').split('-');
-      const menuId = parseInt(parts[0]);
-      const lvn = parseInt(parts[1]);
-      st(menuId).pedas = lvn;
-    }
-    if (id && id.startsWith('llv')) {
-      const rest = id.replace('llv','');
-      const [mId, slot, lvn] = rest.split('-');
-      if (st(parseInt(mId)).lauk) st(parseInt(mId)).lauk[parseInt(slot)].pedas = parseInt(lvn);
-    }
-  }
-});
-
-function pickLauk(mId, slot, lId, hasSambal) {
+// ─────────────────────────────────────────────
+// LAUK PICKER
+// ─────────────────────────────────────────────
+function pickLauk(mId, slot, lId) {
+  const lDef = LAUKS.find(l => l.id === lId);
   const s = st(mId);
-  s.lauk[slot].id = lId;
-  if (!hasSambal) s.lauk[slot].sambal = null;
+  // Reset sambal if different lauk selected
+  if (s.lauk[slot].id !== lId) {
+    s.lauk[slot] = { id: lId, sambal: null, pedas: 1 };
+  } else {
+    s.lauk[slot].id = lId;
+  }
+
   LAUKS.forEach(l => {
     const b = document.getElementById('lk' + mId + '-' + slot + '-' + l.id);
     if (b) b.classList.toggle('on', l.id === lId);
   });
+
   const sub = document.getElementById('ls' + mId + '-' + slot);
-  if (sub) sub.classList.toggle('show', hasSambal);
+  if (sub) sub.classList.toggle('show', lDef.hasSambal || lDef.hasSpice);
+
+  // Reset sambal chip UI if lauk changed
+  if (!lDef.hasSambal) s.lauk[slot].sambal = null;
 }
 
 function chQty(id, d) {
@@ -648,29 +521,35 @@ function chQty(id, d) {
   document.getElementById('qn' + id).textContent = s.qty;
 }
 
-// ── ADD TO CART ──
+// ─────────────────────────────────────────────
+// ADD TO CART
+// ─────────────────────────────────────────────
 function addCart(id) {
   const m = MENU.find(x => x.id === id);
   const s = st(id);
 
+  // Validate standalone
   if (m.sambal && !s.sambal) { alert('Pilih sambal dulu ya! 🌶️'); return; }
-  if (m.pedas && !s.pedas) { alert('Pilih level pedas dulu! 🔥'); return; }
+  if (m.pedas && s.pedas === null) { alert('Pilih level pedas dulu! 🔥'); return; }
 
+  // Validate paket
   if (m.paket) {
-    for (let sl of [1,2]) {
-      if (!s.lauk[sl].id) { alert('Pilih lauk ' + sl + ' dulu ya! 🍽️'); return; }
-      const ld = LAUKS.find(l => l.id === s.lauk[sl].id);
-      if (ld.sambal && !s.lauk[sl].sambal) { alert('Pilih sambal untuk lauk ' + sl + '! 🌶️'); return; }
+    for (let slot of [1,2]) {
+      const sl = s.lauk[slot];
+      if (!sl.id) { alert('Pilih lauk ' + slot + ' dulu ya! 🍽️'); return; }
+      const ld = LAUKS.find(l => l.id === sl.id);
+      if (ld.hasSambal && !sl.sambal) { alert('Pilih sambal untuk lauk ' + slot + '! 🌶️'); return; }
     }
   }
 
   let laukInfo = null;
   if (m.paket) {
-    laukInfo = [1,2].map(sl => {
-      const ld = LAUKS.find(l => l.id === s.lauk[sl].id);
+    laukInfo = [1,2].map(slot => {
+      const sl = s.lauk[slot];
+      const ld = LAUKS.find(l => l.id === sl.id);
       let str = ld.e + ' ' + ld.n;
-      if (s.lauk[sl].sambal) str += ' + ' + s.lauk[sl].sambal;
-      str += ' (Pedas Lv.' + s.lauk[sl].pedas + ')';
+      if (sl.sambal) str += ' + ' + sl.sambal;
+      if (ld.hasSpice) str += ' (Pedas Lv.' + sl.pedas + ')';
       return str;
     });
   }
@@ -678,7 +557,9 @@ function addCart(id) {
   cart.push({
     cid: Date.now() + Math.random(),
     id, emoji: m.e, name: m.n, price: m.p, qty: s.qty,
-    sambal: s.sambal, pedas: s.pedas, laukInfo
+    sambal: s.sambal,
+    pedas: s.pedas,
+    laukInfo
   });
 
   const ab = document.getElementById('ab' + id);
@@ -688,7 +569,9 @@ function addCart(id) {
   updateBar();
 }
 
-// ── CART BAR ──
+// ─────────────────────────────────────────────
+// CART BAR
+// ─────────────────────────────────────────────
 function updateBar() {
   const total = cart.reduce((a,c) => a + c.price * c.qty, 0);
   const count = cart.reduce((a,c) => a + c.qty, 0);
@@ -699,7 +582,9 @@ function updateBar() {
   document.getElementById('cartBar').style.display = cart.length ? 'flex' : 'none';
 }
 
-// ── MODAL ──
+// ─────────────────────────────────────────────
+// MODAL
+// ─────────────────────────────────────────────
 function openModal() {
   document.getElementById('overlay').classList.remove('hidden');
   document.getElementById('orderView').classList.remove('hidden');
@@ -714,6 +599,7 @@ function renderCI() {
   const el = document.getElementById('cartItems');
   const total = cart.reduce((a,c) => a + c.price * c.qty, 0);
   document.getElementById('mTotal').textContent = rp(total);
+
   if (!cart.length) {
     el.innerHTML = '<div class="empty-cart"><div class="ei">🛒</div><p>Keranjang masih kosong.<br>Pilih menu dulu yuk!</p></div>';
     return;
@@ -721,7 +607,7 @@ function renderCI() {
   el.innerHTML = cart.map((c, i) => {
     let subs = [];
     if (c.sambal) subs.push('🌶️ ' + c.sambal);
-    if (c.pedas) subs.push('🔥 Pedas Level ' + c.pedas);
+    if (c.pedas)  subs.push('🔥 Pedas Level ' + c.pedas);
     if (c.laukInfo) subs = subs.concat(c.laukInfo);
     return '<div class="ci">' +
       '<div class="ci-emoji">' + c.emoji + '</div>' +
@@ -738,36 +624,62 @@ function renderCI() {
 
 function rmItem(i) { cart.splice(i,1); updateBar(); renderCI(); }
 
-// ── MAPS ──
-function openMaps() {
-  window.open('https://www.google.com/maps', '_blank');
-  setTimeout(() => {
-    const a = prompt('Salin nama lokasi dari Google Maps dan tempel di sini:');
-    if (a && a.trim()) {
-      document.getElementById('fAddress').value = a.trim();
-      const p = document.getElementById('locPrev');
-      p.style.display = 'block'; p.textContent = '📍 ' + a.trim();
-    }
-  }, 1200);
+// ─────────────────────────────────────────────
+// GOOGLE MAPS PLACES AUTOCOMPLETE
+// ─────────────────────────────────────────────
+let autocomplete = null;
+
+function initMaps() {
+  const input = document.getElementById('addressSearch');
+  if (!input) return;
+
+  autocomplete = new google.maps.places.Autocomplete(input, {
+    componentRestrictions: { country: 'id' },
+    fields: ['formatted_address', 'geometry', 'name'],
+    types: ['geocode', 'establishment']
+  });
+
+  autocomplete.addListener('place_changed', () => {
+    const place = autocomplete.getPlace();
+    if (!place || !place.formatted_address) return;
+
+    const addr = place.formatted_address;
+    document.getElementById('fAddress').value = addr;
+    input.value = addr;
+
+    const prev = document.getElementById('locPrev');
+    prev.style.display = 'block';
+    prev.innerHTML = '✅ <strong>' + (place.name || addr) + '</strong><br><span style="font-size:.72rem;opacity:.8">' + addr + '</span>';
+
+    // Clear error
+    document.getElementById('eA').classList.remove('show');
+    input.style.borderColor = '';
+  });
 }
 
-// ── APPS SCRIPT URL ──
-// Setelah kamu deploy Apps Script, paste URL-nya di sini:
-const APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
-
-// ── SUBMIT ──
+// ─────────────────────────────────────────────
+// SUBMIT
+// ─────────────────────────────────────────────
 async function submitOrder() {
   const name    = document.getElementById('fName').value.trim();
   const phone   = document.getElementById('fPhone').value.trim();
-  const address = document.getElementById('fAddress').value.trim();
+  const address = document.getElementById('fAddress').value.trim() ||
+                  document.getElementById('addressSearch').value.trim();
   const notes   = document.getElementById('fNotes').value.trim();
 
   let ok = true;
-  [{fi:'fName',fe:'eN',v:name},{fi:'fPhone',fe:'eP',v:phone},{fi:'fAddress',fe:'eA',v:address}].forEach(f => {
+  [
+    {fi:'fName',    fe:'eN', v:name,    msg:'Nama wajib diisi.'},
+    {fi:'fPhone',   fe:'eP', v:phone,   msg:'Nomor WhatsApp wajib diisi.'},
+    {fi:'addressSearch', fe:'eA', v:address, msg:'Alamat wajib diisi.'},
+  ].forEach(f => {
     const inp = document.getElementById(f.fi);
     const er  = document.getElementById(f.fe);
-    if (!f.v) { inp.classList.add('err'); er.classList.add('show'); ok = false; }
-    else       { inp.classList.remove('err'); er.classList.remove('show'); }
+    if (!f.v) {
+      inp.classList.add('err'); er.classList.add('show'); ok = false;
+    } else {
+      inp.classList.remove('err'); er.classList.remove('show');
+    }
   });
   if (!ok) return;
   if (!cart.length) { alert('Keranjang masih kosong!'); return; }
@@ -781,26 +693,35 @@ async function submitOrder() {
   const itemsStr = cart.map(c => {
     let line = c.name + ' x' + c.qty;
     if (c.sambal) line += ' | ' + c.sambal;
-    if (c.pedas) line += ' | Pedas Lv.' + c.pedas;
+    if (c.pedas)  line += ' | Pedas Lv.' + c.pedas;
     if (c.laukInfo) line += ' | ' + c.laukInfo.join(' / ');
     return line + ' = ' + rp(c.price * c.qty);
   }).join('\n');
 
-  const payload = { timestamp: ts, name, phone, address, items: itemsStr, total: rp(total), notes: notes||'-' };
+  const payload = {
+    timestamp: ts, name, phone, address, items: itemsStr,
+    total: rp(total), notes: notes||'-'
+  };
 
+  // Send to Google Sheets via Apps Script
   if (APPS_SCRIPT_URL !== 'YOUR_APPS_SCRIPT_URL_HERE') {
     try {
-      await fetch(APPS_SCRIPT_URL, {method:'POST', mode:'no-cors', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload)});
-    } catch(e) { console.warn('Sheet error:', e); }
+      await fetch(APPS_SCRIPT_URL, {
+        method: 'POST', mode: 'no-cors',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify(payload)
+      });
+    } catch(e) { console.warn('Sheet submit failed:', e); }
   }
 
+  // Build WhatsApp message
   const waLines = [
     '🛒 *PESANAN BARU — Lawuk Pawuk Jakarta*','',
     '📋 *Detail Pesanan:*',
     ...cart.map(c => {
       let l = c.emoji + ' ' + c.name + ' x' + c.qty;
-      if (c.sambal) l += '\n   🌶️ ' + c.sambal;
-      if (c.pedas) l += '\n   🔥 Level Pedas ' + c.pedas;
+      if (c.sambal)   l += '\n   🌶️ ' + c.sambal;
+      if (c.pedas)    l += '\n   🔥 Level Pedas ' + c.pedas;
       if (c.laukInfo) c.laukInfo.forEach(x => { l += '\n   • ' + x; });
       return l + '\n   💰 ' + rp(c.price * c.qty);
     }),
@@ -816,11 +737,12 @@ async function submitOrder() {
   document.getElementById('orderView').classList.add('hidden');
   document.getElementById('successView').classList.remove('hidden');
   document.getElementById('mTitle').textContent = '✅ Pesanan Diterima';
-  setTimeout(() => window.open('https://wa.me/62?text=' + waMsg, '_blank'), 700);
 
+  setTimeout(() => window.open('https://wa.me/62?text=' + waMsg, '_blank'), 700);
   cart = []; updateBar();
 }
 
+// ─────────────────────────────────────────────
 renderMenu();
 </script>
 </body>
