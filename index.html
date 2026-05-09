@@ -91,13 +91,13 @@ main{max-width:700px;margin:0 auto;padding:2rem 1rem 9rem}
 
 /* ── CART BAR ── */
 .cart-bar{position:fixed;bottom:0;left:0;right:0;z-index:100;display:flex;justify-content:center}
-.cart-inner{width:100%;max-width:700px;background:var(--text);border-top:1px solid rgba(255,255,255,.08);padding:13px 1.2rem;box-shadow:0 -8px 32px rgba(0,0,0,.2)}
+.cart-inner{width:100%;max-width:700px;background:var(--red-l);border-top:2px solid var(--border);padding:13px 1.2rem;box-shadow:0 -6px 28px rgba(200,48,10,.12)}
 .cart-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
 .cart-ico{position:relative}
-.cart-badge{position:absolute;top:-5px;right:-5px;background:var(--gold);color:#3A2000;font-size:.58rem;font-weight:800;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.cart-badge{position:absolute;top:-5px;right:-5px;background:var(--red);color:#fff;font-size:.58rem;font-weight:800;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center}
 .cart-meta{flex:1}
-.cart-ct{color:rgba(255,255,255,.55);font-size:.73rem;font-weight:500}
-.cart-tot{color:#fff;font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700}
+.cart-ct{color:var(--muted);font-size:.73rem;font-weight:600}
+.cart-tot{color:var(--red);font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:800}
 .checkout-btn{width:100%;background:var(--red);color:#fff;border:none;border-radius:12px;padding:13px;font-weight:700;font-size:.93rem;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:background .15s}
 .checkout-btn:hover{background:var(--red-d)}
 
@@ -118,6 +118,12 @@ main{max-width:700px;margin:0 auto;padding:2rem 1rem 9rem}
 .ci-price{font-weight:700;font-size:.87rem;color:var(--red);font-family:'Playfair Display',serif}
 .rm-btn{background:none;border:none;cursor:pointer;color:var(--border);font-size:.82rem;transition:color .1s;padding:2px}
 .rm-btn:hover{color:var(--red)}
+.ci-qty{display:flex;align-items:center;border:1.5px solid var(--border);border-radius:30px;overflow:hidden;background:var(--bg)}
+.ci-qty-btn{background:none;border:none;width:28px;height:28px;cursor:pointer;font-size:.9rem;font-weight:700;color:var(--red);display:flex;align-items:center;justify-content:center;transition:background .1s;flex-shrink:0}
+.ci-qty-btn:hover{background:var(--red-l)}
+.ci-qty-n{font-weight:800;font-size:.82rem;min-width:24px;text-align:center;color:var(--text)}
+.ci-del-btn{background:none;border:none;cursor:pointer;width:28px;height:28px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.8rem;transition:color .1s;border-left:1px solid var(--border)}
+.ci-del-btn:hover{color:var(--red);background:var(--red-l)}
 .mdivider{height:1px;background:var(--border);margin:1.2rem 0}
 
 /* ── FORM ── */
@@ -221,8 +227,9 @@ main{max-width:700px;margin:0 auto;padding:2rem 1rem 9rem}
       <div id="successView" class="hidden">
         <div class="success-wrap">
           <div class="success-circ">🎉</div>
-          <h3>Pesanan Masuk!</h3>
-          <p>Pesananmu sudah tercatat dengan baik.<br>Kami akan segera konfirmasi via WhatsApp.</p>
+          <h3>Pesanan Berhasil!</h3>
+          <p>Pesananmu sudah kami terima & dicatat.<br>Tim kami akan segera menghubungimu untuk konfirmasi.</p>
+          <button onclick="closeModal()" style="margin-top:1.5rem;background:var(--red);color:#fff;border:none;border-radius:10px;padding:10px 28px;font-weight:700;font-size:.9rem;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;">Tutup</button>
         </div>
       </div>
 
@@ -283,7 +290,7 @@ main{max-width:700px;margin:0 auto;padding:2rem 1rem 9rem}
 // ─────────────────────────────────────────────
 // CONFIG — isi setelah deploy Apps Script
 // ─────────────────────────────────────────────
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxTPFJsqKKoG3r-98war11YpYni3tLnuv5gJkciSGemExUtEJlxowm5U2ebpMlhqeT4Kw/exec';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzHtgcvBCCBoecMYOXe-2kIAbZvzeHZE_RbYqSne5EsamvxDL24254tl5TLXYkqDptrTg/exec';
 
 // ─────────────────────────────────────────────
 // DATA
@@ -639,14 +646,28 @@ function renderCI() {
     return '<div class="ci">' +
       '<div class="ci-emoji">' + c.emoji + '</div>' +
       '<div class="ci-body">' +
-        '<div class="ci-name">' + c.name + ' ×' + c.qty + '</div>' +
+        '<div class="ci-name">' + c.name + '</div>' +
         subs.map(s => '<div class="ci-sub">' + s + '</div>').join('') +
+        '<div style="margin-top:8px;display:flex;align-items:center;gap:8px;">' +
+          '<div class="ci-qty">' +
+            '<button class="ci-qty-btn" onclick="ciQty(' + i + ',-1)">−</button>' +
+            '<span class="ci-qty-n">' + c.qty + '</span>' +
+            '<button class="ci-qty-btn" onclick="ciQty(' + i + ',1)">+</button>' +
+            '<button class="ci-del-btn" onclick="rmItem(' + i + ')" title="Hapus">🗑</button>' +
+          '</div>' +
+          '<span style="font-size:.78rem;color:var(--muted);font-weight:500;">× Rp ' + c.price.toLocaleString('id-ID') + '</span>' +
+        '</div>' +
       '</div>' +
       '<div class="ci-right">' +
         '<span class="ci-price">' + rp(c.price * c.qty) + '</span>' +
-        '<button class="rm-btn" onclick="rmItem(' + i + ')">🗑</button>' +
       '</div></div>';
   }).join('');
+}
+
+function ciQty(i, d) {
+  cart[i].qty = Math.max(1, cart[i].qty + d);
+  updateBar();
+  renderCI();
 }
 
 function rmItem(i) { cart.splice(i,1); updateBar(); renderCI(); }
@@ -815,7 +836,7 @@ async function submitOrder() {
     notes: notes || '-'
   };
 
-  // POST to Apps Script → Google Sheets
+  // POST to Apps Script → Google Sheets + email notif
   if (APPS_SCRIPT_URL !== 'YOUR_APPS_SCRIPT_URL_HERE') {
     try {
       await fetch(APPS_SCRIPT_URL, {
@@ -826,32 +847,10 @@ async function submitOrder() {
     } catch(e) { console.warn('Sheets error:', e); }
   }
 
-  // WhatsApp fallback always fires
-  const waLines = [
-    '🛒 *PESANAN BARU — Lawuk Pawuk Jakarta*','',
-    '📋 *Detail Pesanan:*',
-    ...cart.map(c => {
-      let l = c.emoji + ' ' + c.name + ' x' + c.qty;
-      if (c.sambal)   l += '\n   🌶️ ' + c.sambal;
-      if (c.pedas)    l += '\n   🔥 Level Pedas ' + c.pedas;
-      if (c.laukInfo) c.laukInfo.forEach(x => { l += '\n   • ' + x; });
-      return l + '\n   💰 ' + rp(c.price * c.qty);
-    }),
-    '','*TOTAL: ' + rp(total) + '*','',
-    '👤 *Pemesan:* ' + name,
-    '📱 *WA:* ' + phone,
-    '📍 *Alamat:* ' + selectedAddress,
-    '📝 *Catatan:* ' + (notes||'-'),
-    '🕐 ' + ts,
-  ];
-  const waMsg = encodeURIComponent(waLines.join('\n'));
-
-  // Show success screen
+  // Show success screen — no WA redirect
   document.getElementById('orderView').classList.add('hidden');
   document.getElementById('successView').classList.remove('hidden');
   document.getElementById('mTitle').textContent = '✅ Pesanan Diterima';
-
-  setTimeout(() => window.open('https://wa.me/62?text=' + waMsg, '_blank'), 700);
   cart = []; updateBar();
 }
 
