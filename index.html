@@ -5,12 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lawuk Pawuk Jakarta</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<!-- Google Maps Places API — ganti YOUR_GMAPS_KEY dengan API key kamu -->
-<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GMAPS_KEY&libraries=places&language=id&callback=initMaps" async defer></script>
 <style>
 :root {
   --red:#C8300A; --red-d:#9E2508; --red-l:#FDF0EC;
-  --gold:#C8960A; --gold-l:#FDF7E6;
+  --gold:#C8960A;
   --bg:#FAF7F4; --surface:#FFF;
   --text:#18120E; --muted:#7A6A60; --border:#EDE0D8;
   --shadow:rgba(30,15,5,0.09);
@@ -24,12 +22,12 @@ header{background:var(--text);color:#fff;position:relative;overflow:hidden}
 .hd{position:absolute;inset:0;background:radial-gradient(ellipse at 15% 60%,rgba(200,48,10,.28) 0%,transparent 55%),radial-gradient(ellipse at 85% 20%,rgba(200,150,10,.15) 0%,transparent 50%)}
 .hi{position:relative;z-index:2;padding:2.5rem 1.5rem 2rem;text-align:center}
 .hpill{display:inline-flex;align-items:center;gap:6px;background:rgba(200,150,10,.18);border:1px solid rgba(200,150,10,.4);color:#F0C040;font-size:.68rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:5px 14px;border-radius:30px;margin-bottom:1rem}
-header h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,8vw,3rem);font-weight:800;line-height:1.05;letter-spacing:-.5px}
+header h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,8vw,3rem);font-weight:800;line-height:1.05}
 header h1 em{font-style:normal;color:#F0A050}
 header p{font-size:.85rem;color:rgba(255,255,255,.6);margin-top:.6rem;font-weight:500}
 .hchips{display:flex;gap:8px;justify-content:center;margin-top:1.4rem;flex-wrap:wrap}
 .hchip{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:20px;padding:5px 13px;font-size:.71rem;font-weight:600;color:rgba(255,255,255,.78)}
-.hbot{position:relative;z-index:2;background:var(--red);padding:9px 1.5rem;text-align:center;font-size:.76rem;font-weight:700;color:rgba(255,255,255,.92);letter-spacing:.3px}
+.hbot{position:relative;z-index:2;background:var(--red);padding:9px 1.5rem;text-align:center;font-size:.76rem;font-weight:700;color:rgba(255,255,255,.92)}
 
 /* ── MAIN ── */
 main{max-width:700px;margin:0 auto;padding:2rem 1rem 9rem}
@@ -42,7 +40,6 @@ main{max-width:700px;margin:0 auto;padding:2rem 1rem 9rem}
 .menu-card{background:var(--surface);border-bottom:1px solid var(--border);transition:background .15s}
 .menu-card:last-child{border-bottom:none}
 .menu-card:hover{background:#FFFCFA}
-
 .card-top{display:flex;align-items:flex-start;gap:14px;padding:16px 18px 14px}
 .card-num{width:24px;height:24px;border-radius:7px;background:var(--red-l);color:var(--red);font-size:.68rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
 .card-body{flex:1;min-width:0}
@@ -54,15 +51,12 @@ main{max-width:700px;margin:0 auto;padding:2rem 1rem 9rem}
 
 /* ── OPTIONS ── */
 .card-opts{padding:0 18px 14px;display:flex;flex-direction:column;gap:12px}
-.opt-block{}
 .opt-lbl{font-size:.67rem;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:7px;display:flex;align-items:center;gap:5px}
 .req{color:var(--red)}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chip{border:1.5px solid var(--border);background:var(--surface);border-radius:9px;padding:5px 13px;font-size:.74rem;font-weight:600;cursor:pointer;transition:all .14s;font-family:'Plus Jakarta Sans',sans-serif;color:var(--text);outline:none}
 .chip:hover{border-color:var(--red);color:var(--red)}
 .chip.on{background:var(--red);border-color:var(--red);color:#fff;font-weight:700}
-
-/* level pedas */
 .level-row{display:flex;gap:5px}
 .lv-chip{flex:1;border:1.5px solid var(--border);background:var(--surface);border-radius:9px;padding:6px 3px;font-size:.7rem;font-weight:700;cursor:pointer;text-align:center;transition:all .14s;font-family:'Plus Jakarta Sans',sans-serif;color:var(--text);display:flex;flex-direction:column;align-items:center;gap:2px;outline:none}
 .lv-chip:hover{border-color:var(--red)}
@@ -75,14 +69,14 @@ main{max-width:700px;margin:0 auto;padding:2rem 1rem 9rem}
 .lauk-slot{border:1.5px solid var(--border);border-radius:13px;overflow:hidden}
 .lauk-slot-head{background:var(--bg);padding:7px 12px;font-size:.68rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:7px}
 .slot-dot{width:18px;height:18px;border-radius:6px;background:var(--red);color:#fff;font-size:.62rem;font-weight:800;display:flex;align-items:center;justify-content:center}
-.lauk-slot-body{padding:10px 12px;display:flex;flex-direction:column;gap:8px}
+.lauk-slot-body{padding:10px 12px;display:flex;flex-direction:column;gap:10px}
 .lauk-chips{display:flex;flex-wrap:wrap;gap:6px}
 .lauk-chip{border:1.5px solid var(--border);background:var(--surface);border-radius:9px;padding:6px 11px;font-size:.74rem;font-weight:600;cursor:pointer;transition:all .14s;font-family:'Plus Jakarta Sans',sans-serif;color:var(--text);display:flex;align-items:center;gap:5px;outline:none}
 .lauk-chip:hover{border-color:var(--red);color:var(--red)}
 .lauk-chip.on{background:var(--red-l);border-color:var(--red);color:var(--red);font-weight:700}
-.lauk-sub{display:none;flex-direction:column;gap:8px}
-.lauk-sub.show{display:flex}
-.lauk-sub-inner{background:var(--bg);border:1px dashed var(--border);border-radius:9px;padding:9px 10px;display:flex;flex-direction:column;gap:8px}
+.lauk-extras{display:none;flex-direction:column;gap:8px}
+.lauk-extras.show{display:flex}
+.lauk-extras-inner{background:var(--bg);border:1px dashed var(--border);border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:10px}
 
 /* ── CARD FOOTER ── */
 .card-foot{padding:10px 18px 16px;display:flex;align-items:center;gap:10px}
@@ -90,7 +84,7 @@ main{max-width:700px;margin:0 auto;padding:2rem 1rem 9rem}
 .qty-btn{background:none;border:none;width:34px;height:34px;cursor:pointer;font-size:1rem;font-weight:700;color:var(--red);display:flex;align-items:center;justify-content:center;transition:background .1s}
 .qty-btn:hover{background:var(--red-l)}
 .qty-n{font-weight:800;font-size:.88rem;min-width:28px;text-align:center}
-.add-btn{flex:1;background:var(--red);color:#fff;border:none;border-radius:10px;padding:9px 16px;font-weight:700;font-size:.84rem;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:background .15s,transform .1s;letter-spacing:.1px}
+.add-btn{flex:1;background:var(--red);color:#fff;border:none;border-radius:10px;padding:9px 16px;font-weight:700;font-size:.84rem;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:background .15s,transform .1s}
 .add-btn:hover{background:var(--red-d)}
 .add-btn:active{transform:scale(.97)}
 .add-btn.ok{background:var(--green)}
@@ -115,8 +109,6 @@ main{max-width:700px;margin:0 auto;padding:2rem 1rem 9rem}
 .modal-x{background:var(--border);border:none;border-radius:50%;width:30px;height:30px;cursor:pointer;font-size:.85rem;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:background .1s}
 .modal-x:hover{background:#DDD0C8}
 .modal-body{padding:1.2rem}
-
-/* cart items in modal */
 .ci{background:var(--surface);border:1px solid var(--border);border-radius:13px;padding:12px 14px;margin-bottom:8px;display:flex;align-items:flex-start;gap:11px}
 .ci-emoji{font-size:1.25rem;flex-shrink:0;margin-top:1px}
 .ci-body{flex:1;min-width:0}
@@ -128,7 +120,7 @@ main{max-width:700px;margin:0 auto;padding:2rem 1rem 9rem}
 .rm-btn:hover{color:var(--red)}
 .mdivider{height:1px;background:var(--border);margin:1.2rem 0}
 
-/* form */
+/* ── FORM ── */
 .form-sec-ttl{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;margin-bottom:1rem}
 .fg{margin-bottom:1rem}
 .fl{display:block;font-size:.69rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
@@ -140,38 +132,37 @@ main{max-width:700px;margin:0 auto;padding:2rem 1rem 9rem}
 .ferr{font-size:.71rem;color:var(--red);font-weight:600;margin-top:4px;display:none}
 .ferr.show{display:block}
 
-/* maps */
-.maps-wrap{position:relative}
-.maps-search-box{width:100%;border:1.5px solid var(--border);background:var(--surface);border-radius:11px;padding:11px 14px 11px 40px;font-size:.91rem;font-family:'Plus Jakarta Sans',sans-serif;color:var(--text);outline:none;transition:border-color .15s,box-shadow .15s}
-.maps-search-box:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(200,48,10,.08)}
-.maps-pin-icon{position:absolute;left:13px;top:50%;transform:translateY(-50%);font-size:1rem;pointer-events:none}
+/* Maps autocomplete */
+.maps-wrap{position:relative;margin-bottom:8px}
+.maps-ico{position:absolute;left:13px;top:50%;transform:translateY(-50%);font-size:.95rem;pointer-events:none;z-index:1}
+.maps-input{width:100%;border:1.5px solid var(--border);background:var(--surface);border-radius:11px;padding:11px 14px 11px 40px;font-size:.91rem;font-family:'Plus Jakarta Sans',sans-serif;color:var(--text);outline:none;transition:border-color .15s,box-shadow .15s}
+.maps-input:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(200,48,10,.08)}
+.maps-input.err{border-color:var(--red);background:#FEF6F4}
 .maps-hint{background:#EEF4FF;border:1px solid #C5D8FF;border-radius:9px;padding:9px 12px;font-size:.74rem;color:#1A4A99;font-weight:600;line-height:1.5;margin-bottom:8px}
-.loc-prev{background:var(--green-l);border:1px solid #A8D5BB;border-radius:9px;padding:9px 12px;font-size:.79rem;color:var(--green);font-weight:600;margin-bottom:8px;display:none;line-height:1.5}
+.loc-prev{background:var(--green-l);border:1px solid #A8D5BB;border-radius:9px;padding:9px 12px;font-size:.79rem;color:var(--green);font-weight:600;margin-bottom:8px;display:none;line-height:1.6}
+.pac-container{z-index:9999!important;font-family:'Plus Jakarta Sans',sans-serif!important;border-radius:12px!important;box-shadow:0 8px 32px rgba(0,0,0,.15)!important;border:1px solid var(--border)!important;margin-top:4px!important}
+.pac-item{padding:8px 14px!important;font-size:.82rem!important;cursor:pointer}
+.pac-item:hover{background:var(--red-l)!important}
+.pac-item-query{font-weight:700!important;color:var(--text)!important}
 
-/* order total */
+/* Order total */
 .order-total{background:var(--text);color:#fff;border-radius:14px;padding:16px 18px;display:flex;align-items:center;justify-content:space-between;margin:1.4rem 0 1rem}
-.ot-label{font-size:.8rem;font-weight:600;opacity:.65}
-.ot-amount{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:#F0C060}
+.ot-lbl{font-size:.8rem;font-weight:600;opacity:.65}
+.ot-amt{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:#F0C060}
 .send-btn{width:100%;background:var(--red);color:#fff;border:none;border-radius:12px;padding:14px;font-weight:700;font-size:1rem;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:background .15s,transform .1s}
 .send-btn:hover:not(:disabled){background:var(--red-d)}
 .send-btn:active{transform:scale(.98)}
 .send-btn:disabled{opacity:.5;cursor:not-allowed}
 
-/* success */
+/* Success */
 .success-wrap{text-align:center;padding:2.5rem 1rem}
 .success-circ{width:72px;height:72px;border-radius:50%;background:var(--green-l);border:2px solid #A8D5BB;display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 1rem}
 .success-wrap h3{font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:.4rem}
 .success-wrap p{font-size:.84rem;color:var(--muted);font-weight:500;line-height:1.7}
-
-/* empty cart */
 .empty-cart{text-align:center;padding:2.5rem 1rem}
 .empty-cart .ei{font-size:2.5rem;opacity:.35}
 .empty-cart p{color:var(--muted);font-size:.84rem;font-weight:600;margin-top:.5rem}
-
 .hidden{display:none!important}
-
-/* pac-container (Google autocomplete dropdown) z-index fix */
-.pac-container{z-index:9999!important}
 </style>
 </head>
 <body>
@@ -242,54 +233,57 @@ main{max-width:700px;margin:0 auto;padding:2rem 1rem 9rem}
 
         <div class="fg">
           <label class="fl">Nama Lengkap <span class="req">*</span></label>
-          <input type="text" class="fi" id="fName" placeholder="Nama kamu...">
+          <input class="fi" type="text" id="fName" placeholder="Nama kamu...">
           <div class="ferr" id="eN">Nama wajib diisi.</div>
         </div>
 
         <div class="fg">
           <label class="fl">Nomor WhatsApp <span class="req">*</span></label>
-          <input type="tel" class="fi" id="fPhone" placeholder="08xxxxxxxxxx">
+          <input class="fi" type="tel" id="fPhone" placeholder="08xxxxxxxxxx">
           <div class="ferr" id="eP">Nomor WhatsApp wajib diisi.</div>
         </div>
 
         <div class="fg">
           <label class="fl">Alamat Pengiriman <span class="req">*</span></label>
-          <div class="maps-hint">📍 Ketik nama jalan atau lokasi — pilih dari daftar yang muncul untuk alamat akurat.</div>
+          <div class="maps-hint">📍 Ketik nama jalan atau lokasi — pilih dari saran yang muncul untuk alamat akurat.</div>
           <div class="maps-wrap">
-            <span class="maps-pin-icon">📍</span>
-            <input type="text" class="maps-search-box" id="addressSearch" placeholder="Cari alamat atau nama lokasi...">
+            <span class="maps-ico">📍</span>
+            <input class="maps-input" type="text" id="addressInput" placeholder="Cari alamat atau nama lokasi..." autocomplete="off">
           </div>
           <div class="loc-prev" id="locPrev"></div>
-          <input type="hidden" id="fAddress">
-          <div class="ferr" id="eA">Alamat wajib diisi.</div>
+          <div class="ferr" id="eA">Alamat wajib dipilih dari saran Google Maps.</div>
         </div>
 
         <div class="fg">
           <label class="fl">Catatan Tambahan</label>
-          <textarea class="fta" id="fNotes" placeholder="Ada permintaan khusus? Misal: titik drop, patokan rumah, dll."></textarea>
+          <textarea class="fta" id="fNotes" placeholder="Patokan rumah, permintaan khusus, dll."></textarea>
         </div>
 
         <div class="order-total">
-          <div><div class="ot-label">Total Pembayaran</div><div class="ot-amount" id="mTotal">Rp 0</div></div>
-          <div style="font-size:1.5rem">🧾</div>
+          <div><div class="ot-lbl">Total Pembayaran</div><div class="ot-amt" id="mTotal">Rp 0</div></div>
+          <span style="font-size:1.5rem">🧾</span>
         </div>
         <button class="send-btn" id="sendBtn" onclick="submitOrder()">📨 Kirim Pesanan</button>
       </div>
+
     </div>
   </div>
 </div>
 
+<!-- Google Maps Places API — ganti YOUR_GMAPS_KEY dengan API key kamu -->
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GMAPS_KEY&libraries=places&language=id&callback=initMaps" async defer></script>
+
 <script>
 // ─────────────────────────────────────────────
-// CONFIG — ganti setelah deploy Apps Script
+// CONFIG — isi setelah deploy Apps Script
 // ─────────────────────────────────────────────
 const APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
 
 // ─────────────────────────────────────────────
 // DATA
 // ─────────────────────────────────────────────
-const SAMBAL = ['Sambal Bawang','Sambal Matah','Sambal Terasi'];
-const LEVELS = [
+const SAMBAL  = ['Sambal Bawang','Sambal Matah','Sambal Terasi'];
+const LEVELS  = [
   {n:1,icon:'🌶️',       lbl:'Lv.1'},
   {n:2,icon:'🌶️🌶️',    lbl:'Lv.2'},
   {n:3,icon:'🌶️🌶️🌶️', lbl:'Lv.3'},
@@ -297,8 +291,7 @@ const LEVELS = [
   {n:5,icon:'💀',        lbl:'Lv.5'},
 ];
 
-// hasSambal = apakah lauk ini punya opsi sambal di paket
-// hasSpice  = apakah lauk ini punya opsi pedas di paket
+// Lauk options in Paket — hasSambal & hasSpice control what extras appear
 const LAUKS = [
   {id:'tongkol', e:'🐟', n:'Tongkol Kemangi', hasSambal:true,  hasSpice:true },
   {id:'ayam',    e:'🍗', n:'Ayam Suwir',      hasSambal:true,  hasSpice:true },
@@ -306,34 +299,34 @@ const LAUKS = [
   {id:'cumi',    e:'🦑', n:'Cumi Pedas',      hasSambal:true,  hasSpice:true },
 ];
 
-// sambal: apakah menu ini punya opsi sambal standalone
-// pedas:  apakah menu ini punya opsi level pedas standalone
+// sambal/pedas: standalone options; paket: 2-lauk picker
 const MENU = [
-  {id:1, e:'🐟', n:'Tongkol Kemangi A La Carte',              w:'300g', p:30000, desc:'Ikan tongkol dimasak dengan kemangi, wangi & nikmat!',             sambal:true,  pedas:true,  paket:false},
-  {id:2, e:'🐟', n:'Tongkol Kemangi + Nasi',                  w:'',     p:18000, desc:'Tongkol kemangi lengkap dengan nasi putih hangat.',                sambal:true,  pedas:true,  paket:false},
-  {id:3, e:'🍗', n:'Ayam Suwir A La Carte',                   w:'300g', p:30000, desc:'Ayam rebus suwir pilihan, lembut & gurih. Tinggi protein!',        sambal:true,  pedas:true,  paket:false},
-  {id:4, e:'🍗', n:'Ayam Suwir + Nasi',                       w:'',     p:18000, desc:'Ayam suwir dengan pilihan sambal + nasi putih.',                   sambal:true,  pedas:true,  paket:false},
-  {id:5, e:'🫘', n:'Tempe Teri A La Carte',                   w:'300g', p:30000, desc:'Perpaduan tempe renyah dan teri gurih, nagih banget!',             sambal:false, pedas:false, paket:false},
-  {id:6, e:'🦑', n:'Cumi Pedas A La Carte',                   w:'300g', p:35000, desc:'Cumi empuk dimasak pedas menggoda, bikin nagih!',                 sambal:true,  pedas:true,  paket:false},
-  {id:7, e:'🦑', n:'Nasi + Cumi Pedas',                       w:'',     p:18000, desc:'Cumi pedas dengan pilihan sambal + nasi putih.',                   sambal:true,  pedas:true,  paket:false},
-  {id:8, e:'🍱', n:'Paket Nasi + 2 Lauk + Telur Mata Sapi',  w:'',     p:25000, desc:'Nasi putih + 2 lauk pilihan + telur mata sapi. Super lengkap!',   sambal:false, pedas:false, paket:true },
-  {id:9, e:'🌶️', n:'Add On Sambal',                           w:'',     p:5000,  desc:'Tambah porsi sambal favoritmu!',                                  sambal:true,  pedas:false, paket:false},
+  {id:1, e:'🐟', n:'Tongkol Kemangi A La Carte',             w:'300g', p:30000, desc:'Ikan tongkol dimasak dengan kemangi, wangi & nikmat!',            sambal:true,  pedas:true,  paket:false},
+  {id:2, e:'🐟', n:'Tongkol Kemangi + Nasi',                 w:'',     p:18000, desc:'Tongkol kemangi lengkap dengan nasi putih hangat.',               sambal:true,  pedas:true,  paket:false},
+  {id:3, e:'🍗', n:'Ayam Suwir A La Carte',                  w:'300g', p:30000, desc:'Ayam rebus suwir pilihan, lembut & gurih. Tinggi protein!',       sambal:true,  pedas:true,  paket:false},
+  {id:4, e:'🍗', n:'Ayam Suwir + Nasi',                      w:'',     p:18000, desc:'Ayam suwir dengan pilihan sambal + nasi putih.',                  sambal:true,  pedas:true,  paket:false},
+  {id:5, e:'🫘', n:'Tempe Teri A La Carte',                  w:'300g', p:30000, desc:'Perpaduan tempe renyah dan teri gurih, nagih banget!',            sambal:false, pedas:false, paket:false},
+  {id:6, e:'🦑', n:'Cumi Pedas A La Carte',                  w:'300g', p:35000, desc:'Cumi empuk dimasak pedas menggoda, bikin nagih!',                sambal:true,  pedas:true,  paket:false},
+  {id:7, e:'🦑', n:'Nasi + Cumi Pedas',                      w:'',     p:18000, desc:'Cumi pedas dengan pilihan sambal + nasi putih.',                  sambal:true,  pedas:true,  paket:false},
+  {id:8, e:'🍱', n:'Paket Nasi + 2 Lauk + Telur Mata Sapi', w:'',     p:25000, desc:'Nasi putih + 2 lauk pilihan + telur mata sapi. Super lengkap!',  sambal:false, pedas:false, paket:true },
+  {id:9, e:'🌶️', n:'Add On Sambal',                          w:'',     p:5000,  desc:'Tambah porsi sambal favoritmu!',                                  sambal:true,  pedas:false, paket:false},
 ];
 
 // ─────────────────────────────────────────────
 // STATE
 // ─────────────────────────────────────────────
 let cart = [];
-let ST = {};
+let ST   = {};
+let selectedAddress = '';  // set by Places Autocomplete
 
 function st(id) {
   if (!ST[id]) {
     const m = MENU.find(x => x.id === id);
     ST[id] = {
-      qty: 1,
+      qty:    1,
       sambal: null,
-      pedas: m.pedas ? 1 : null,
-      lauk: m.paket
+      pedas:  m.pedas ? 1 : null,
+      lauk:   m.paket
         ? { 1:{id:null,sambal:null,pedas:1}, 2:{id:null,sambal:null,pedas:1} }
         : null
     };
@@ -346,61 +339,66 @@ function st(id) {
 // ─────────────────────────────────────────────
 function rp(n) { return 'Rp ' + n.toLocaleString('id-ID'); }
 
-function buildSambalChips(pfx) {
+// Build sambal chip row with a unique prefix
+function sambalRow(pfx) {
   return '<div class="chips">' +
     SAMBAL.map(s =>
-      '<button class="chip" id="' + pfx + s.replace(/\s/g,'_') + '" onclick="pickSambal(\'' + pfx + '\',\'' + s + '\')">' + s + '</button>'
+      '<button class="chip" id="' + pfx + s.replace(/\s/g,'_') + '" ' +
+      'onclick="pickSambal(\'' + pfx + '\',\'' + s + '\')">' + s + '</button>'
     ).join('') +
   '</div>';
 }
 
-function buildLevelChips(pfx, defLv) {
+// Build level pedas row with a unique prefix; defLv is highlighted by default
+function levelRow(pfx, defLv) {
   return '<div class="level-row">' +
-    LEVELS.map(lv => {
-      const on = lv.n === (defLv||1) ? ' on' : '';
-      return '<button class="lv-chip' + on + '" id="' + pfx + lv.n + '" onclick="pickLv(\'' + pfx + '\',' + lv.n + ')">' +
-        '<span>' + lv.icon + '</span><span class="lv-sub">' + lv.lbl + '</span></button>';
-    }).join('') +
+    LEVELS.map(lv =>
+      '<button class="lv-chip' + (lv.n === (defLv||1) ? ' on' : '') + '" ' +
+      'id="' + pfx + lv.n + '" onclick="pickLv(\'' + pfx + '\',' + lv.n + ')">' +
+      '<span>' + lv.icon + '</span><span class="lv-sub">' + lv.lbl + '</span></button>'
+    ).join('') +
   '</div>';
 }
 
+// Toggle sambal chips and persist to state
 function pickSambal(pfx, val) {
   SAMBAL.forEach(s => {
     const b = document.getElementById(pfx + s.replace(/\s/g,'_'));
     if (b) b.classList.toggle('on', s === val);
   });
-  // Update state
-  applyPfxState(pfx, 'sambal', val);
+  writeSambal(pfx, val);
 }
 
+// Toggle level chips and persist to state
 function pickLv(pfx, n) {
   LEVELS.forEach(lv => {
     const b = document.getElementById(pfx + lv.n);
     if (b) b.classList.toggle('on', lv.n === n);
   });
-  applyPfxState(pfx, 'pedas', n);
+  writePedas(pfx, n);
 }
 
-function applyPfxState(pfx, key, val) {
-  // pfx patterns:
-  // standalone sambal: "sm{id}-"
-  // standalone pedas:  "lv{id}-"
-  // lauk sambal:       "lsm{id}-{slot}-"
-  // lauk pedas:        "llv{id}-{slot}-"
-  if (pfx.startsWith('sm')) {
-    const id = parseInt(pfx.replace('sm','').replace('-',''));
-    st(id).sambal = val;
-  } else if (pfx.startsWith('lv')) {
-    const id = parseInt(pfx.replace('lv','').replace('-',''));
-    st(id).pedas = val;
-  } else if (pfx.startsWith('lsm')) {
-    const parts = pfx.replace('lsm','').split('-');
-    const [id, slot] = [parseInt(parts[0]), parseInt(parts[1])];
-    st(id).lauk[slot].sambal = val;
-  } else if (pfx.startsWith('llv')) {
-    const parts = pfx.replace('llv','').split('-');
-    const [id, slot] = [parseInt(parts[0]), parseInt(parts[1])];
-    st(id).lauk[slot].pedas = val;
+// Prefix conventions:
+//   standalone sambal  → 'sm{id}-'
+//   standalone pedas   → 'lv{id}-'
+//   lauk sambal slot   → 'lsm{id}-{slot}-'
+//   lauk pedas slot    → 'llv{id}-{slot}-'
+function writeSambal(pfx, val) {
+  if (pfx.startsWith('lsm')) {
+    const [mid, slot] = pfx.replace('lsm','').split('-');
+    st(+mid).lauk[+slot].sambal = val;
+  } else {
+    const mid = pfx.replace('sm','').replace(/-/g,'');
+    st(+mid).sambal = val;
+  }
+}
+function writePedas(pfx, n) {
+  if (pfx.startsWith('llv')) {
+    const [mid, slot] = pfx.replace('llv','').split('-');
+    st(+mid).lauk[+slot].pedas = n;
+  } else {
+    const mid = pfx.replace('lv','').replace(/-/g,'');
+    st(+mid).pedas = n;
   }
 }
 
@@ -411,58 +409,67 @@ function renderMenu() {
   document.getElementById('menuGrid').innerHTML = MENU.map((m, idx) => {
     let opts = '';
 
-    // standalone sambal + pedas
+    // ── Standalone sambal + pedas options ──
     if (m.sambal || m.pedas) {
       opts += '<div class="card-opts">';
       if (m.sambal) {
-        opts += '<div class="opt-block">' +
+        opts += '<div>' +
           '<div class="opt-lbl">Pilih Sambal <span class="req">*</span></div>' +
-          buildSambalChips('sm' + m.id + '-') +
-          '</div>';
+          sambalRow('sm' + m.id + '-') +
+        '</div>';
       }
       if (m.pedas) {
-        opts += '<div class="opt-block">' +
+        opts += '<div>' +
           '<div class="opt-lbl">Level Pedas <span class="req">*</span></div>' +
-          buildLevelChips('lv' + m.id + '-', 1) +
-          '</div>';
+          levelRow('lv' + m.id + '-', 1) +
+        '</div>';
       }
       opts += '</div>';
     }
 
-    // paket 2 lauk
+    // ── Paket 2 lauk ──
     if (m.paket) {
-      opts += '<div class="card-opts"><div class="opt-block">' +
+      opts += '<div class="card-opts"><div>' +
         '<div class="opt-lbl">Pilih 2 Lauk <span class="req">*</span></div>' +
         '<div class="lauk-slots">';
 
       [1,2].forEach(slot => {
         opts += '<div class="lauk-slot">' +
-          '<div class="lauk-slot-head"><span class="slot-dot">' + slot + '</span> Lauk ' + slot + '</div>' +
+          '<div class="lauk-slot-head">' +
+            '<span class="slot-dot">' + slot + '</span> Lauk ' + slot +
+          '</div>' +
           '<div class="lauk-slot-body">' +
-          '<div><div class="opt-lbl">Pilih Lauk <span class="req">*</span></div>' +
-          '<div class="lauk-chips">';
 
-        LAUKS.forEach(l => {
-          opts += '<button class="lauk-chip" id="lk' + m.id + '-' + slot + '-' + l.id + '" ' +
-            'onclick="pickLauk(' + m.id + ',' + slot + ',\'' + l.id + '\')">' +
-            l.e + ' ' + l.n + '</button>';
-        });
+          // Lauk picker chips
+          '<div>' +
+            '<div class="opt-lbl">Pilih Lauk <span class="req">*</span></div>' +
+            '<div class="lauk-chips">' +
+              LAUKS.map(l =>
+                '<button class="lauk-chip" id="lk' + m.id + '-' + slot + '-' + l.id + '" ' +
+                'onclick="pickLauk(' + m.id + ',' + slot + ',\'' + l.id + '\')">' +
+                l.e + ' ' + l.n + '</button>'
+              ).join('') +
+            '</div>' +
+          '</div>' +
 
-        opts += '</div></div>';
+          // Sambal + Level extras (shown only when lauk with those options is selected)
+          '<div class="lauk-extras" id="lx' + m.id + '-' + slot + '">' +
+            '<div class="lauk-extras-inner">' +
+              '<div>' +
+                '<div class="opt-lbl">Pilih Sambal <span class="req">*</span></div>' +
+                sambalRow('lsm' + m.id + '-' + slot + '-') +
+              '</div>' +
+              '<div>' +
+                '<div class="opt-lbl">Level Pedas <span class="req">*</span></div>' +
+                levelRow('llv' + m.id + '-' + slot + '-', 1) +
+              '</div>' +
+            '</div>' +
+          '</div>' +
 
-        // Collapsible sambal+pedas for this lauk slot (shown when lauk with sambal selected)
-        opts += '<div class="lauk-sub" id="ls' + m.id + '-' + slot + '">' +
-          '<div class="lauk-sub-inner">' +
-          '<div class="opt-lbl">Pilih Sambal <span class="req">*</span></div>' +
-          buildSambalChips('lsm' + m.id + '-' + slot + '-') +
-          '<div class="opt-lbl" style="margin-top:8px;">Level Pedas <span class="req">*</span></div>' +
-          buildLevelChips('llv' + m.id + '-' + slot + '-', 1) +
-          '</div></div>';
-
-        opts += '</div></div>';
+          '</div></div>'; // close lauk-slot-body, lauk-slot
       });
 
-      opts += '</div></div></div>';
+      opts += '</div></div></div>'; // close lauk-slots, div, card-opts
     }
 
     return '<div class="menu-card">' +
@@ -495,60 +502,71 @@ function renderMenu() {
 // ─────────────────────────────────────────────
 function pickLauk(mId, slot, lId) {
   const lDef = LAUKS.find(l => l.id === lId);
-  const s = st(mId);
-  // Reset sambal if different lauk selected
+  const s    = st(mId);
+
+  // Reset extras state when lauk changes
   if (s.lauk[slot].id !== lId) {
     s.lauk[slot] = { id: lId, sambal: null, pedas: 1 };
+    // Reset sambal chips for this slot visually
+    SAMBAL.forEach(sb => {
+      const b = document.getElementById('lsm' + mId + '-' + slot + '-' + sb.replace(/\s/g,'_'));
+      if (b) b.classList.remove('on');
+    });
   } else {
     s.lauk[slot].id = lId;
   }
 
+  // Highlight selected lauk chip
   LAUKS.forEach(l => {
     const b = document.getElementById('lk' + mId + '-' + slot + '-' + l.id);
     if (b) b.classList.toggle('on', l.id === lId);
   });
 
-  const sub = document.getElementById('ls' + mId + '-' + slot);
-  if (sub) sub.classList.toggle('show', lDef.hasSambal || lDef.hasSpice);
-
-  // Reset sambal chip UI if lauk changed
-  if (!lDef.hasSambal) s.lauk[slot].sambal = null;
+  // Show/hide extras box depending on whether lauk has sambal/pedas
+  const extras = document.getElementById('lx' + mId + '-' + slot);
+  if (extras) extras.classList.toggle('show', lDef.hasSambal || lDef.hasSpice);
 }
 
+// ─────────────────────────────────────────────
+// QTY
+// ─────────────────────────────────────────────
 function chQty(id, d) {
   const s = st(id);
-  s.qty = Math.max(1, s.qty + d);
+  s.qty   = Math.max(1, s.qty + d);
   document.getElementById('qn' + id).textContent = s.qty;
 }
 
 // ─────────────────────────────────────────────
-// ADD TO CART
+// ADD TO CART (with full validation)
 // ─────────────────────────────────────────────
 function addCart(id) {
   const m = MENU.find(x => x.id === id);
   const s = st(id);
 
-  // Validate standalone
+  // Validate standalone options
   if (m.sambal && !s.sambal) { alert('Pilih sambal dulu ya! 🌶️'); return; }
-  if (m.pedas && s.pedas === null) { alert('Pilih level pedas dulu! 🔥'); return; }
+  if (m.pedas  && s.pedas === null) { alert('Pilih level pedas dulu! 🔥'); return; }
 
-  // Validate paket
+  // Validate paket lauk
   if (m.paket) {
-    for (let slot of [1,2]) {
-      const sl = s.lauk[slot];
+    for (const slot of [1,2]) {
+      const sl  = s.lauk[slot];
       if (!sl.id) { alert('Pilih lauk ' + slot + ' dulu ya! 🍽️'); return; }
       const ld = LAUKS.find(l => l.id === sl.id);
-      if (ld.hasSambal && !sl.sambal) { alert('Pilih sambal untuk lauk ' + slot + '! 🌶️'); return; }
+      if (ld.hasSambal && !sl.sambal) {
+        alert('Pilih sambal untuk lauk ' + slot + ' (' + ld.n + ') ya! 🌶️'); return;
+      }
     }
   }
 
+  // Build lauk summary for cart display
   let laukInfo = null;
   if (m.paket) {
     laukInfo = [1,2].map(slot => {
       const sl = s.lauk[slot];
       const ld = LAUKS.find(l => l.id === sl.id);
-      let str = ld.e + ' ' + ld.n;
-      if (sl.sambal) str += ' + ' + sl.sambal;
+      let str  = ld.e + ' ' + ld.n;
+      if (sl.sambal)  str += ' + ' + sl.sambal;
       if (ld.hasSpice) str += ' (Pedas Lv.' + sl.pedas + ')';
       return str;
     });
@@ -556,16 +574,19 @@ function addCart(id) {
 
   cart.push({
     cid: Date.now() + Math.random(),
-    id, emoji: m.e, name: m.n, price: m.p, qty: s.qty,
-    sambal: s.sambal,
-    pedas: s.pedas,
+    id, emoji: m.e, name: m.n, price: m.p,
+    qty: s.qty,
+    sambal:   s.sambal,
+    pedas:    s.pedas,
     laukInfo
   });
 
-  const ab = document.getElementById('ab' + id);
+  // UI feedback
   document.getElementById('qp' + id).style.display = 'flex';
+  const ab = document.getElementById('ab' + id);
   ab.textContent = '✓ Ditambahkan'; ab.classList.add('ok');
   setTimeout(() => { ab.textContent = '+ Tambah Lagi'; ab.classList.remove('ok'); }, 1300);
+
   updateBar();
 }
 
@@ -576,9 +597,9 @@ function updateBar() {
   const total = cart.reduce((a,c) => a + c.price * c.qty, 0);
   const count = cart.reduce((a,c) => a + c.qty, 0);
   document.getElementById('cartBadge').textContent = count;
-  document.getElementById('cartCt').textContent = count + ' item';
-  document.getElementById('cartTot').textContent = rp(total);
-  document.getElementById('mTotal').textContent = rp(total);
+  document.getElementById('cartCt').textContent    = count + ' item';
+  document.getElementById('cartTot').textContent   = rp(total);
+  document.getElementById('mTotal').textContent    = rp(total);
   document.getElementById('cartBar').style.display = cart.length ? 'flex' : 'none';
 }
 
@@ -596,7 +617,7 @@ function closeModal() { document.getElementById('overlay').classList.add('hidden
 function overlayClick(e) { if (e.target === document.getElementById('overlay')) closeModal(); }
 
 function renderCI() {
-  const el = document.getElementById('cartItems');
+  const el    = document.getElementById('cartItems');
   const total = cart.reduce((a,c) => a + c.price * c.qty, 0);
   document.getElementById('mTotal').textContent = rp(total);
 
@@ -604,10 +625,10 @@ function renderCI() {
     el.innerHTML = '<div class="empty-cart"><div class="ei">🛒</div><p>Keranjang masih kosong.<br>Pilih menu dulu yuk!</p></div>';
     return;
   }
-  el.innerHTML = cart.map((c, i) => {
+  el.innerHTML = cart.map((c,i) => {
     let subs = [];
-    if (c.sambal) subs.push('🌶️ ' + c.sambal);
-    if (c.pedas)  subs.push('🔥 Pedas Level ' + c.pedas);
+    if (c.sambal)   subs.push('🌶️ ' + c.sambal);
+    if (c.pedas)    subs.push('🔥 Pedas Level ' + c.pedas);
     if (c.laukInfo) subs = subs.concat(c.laukInfo);
     return '<div class="ci">' +
       '<div class="ci-emoji">' + c.emoji + '</div>' +
@@ -627,33 +648,41 @@ function rmItem(i) { cart.splice(i,1); updateBar(); renderCI(); }
 // ─────────────────────────────────────────────
 // GOOGLE MAPS PLACES AUTOCOMPLETE
 // ─────────────────────────────────────────────
-let autocomplete = null;
-
 function initMaps() {
-  const input = document.getElementById('addressSearch');
-  if (!input) return;
+  const input = document.getElementById('addressInput');
+  if (!input || !window.google) return;
 
-  autocomplete = new google.maps.places.Autocomplete(input, {
+  const ac = new google.maps.places.Autocomplete(input, {
     componentRestrictions: { country: 'id' },
-    fields: ['formatted_address', 'geometry', 'name'],
-    types: ['geocode', 'establishment']
+    fields: ['formatted_address', 'name', 'geometry'],
+    types:  ['geocode', 'establishment']
   });
 
-  autocomplete.addListener('place_changed', () => {
-    const place = autocomplete.getPlace();
+  ac.addListener('place_changed', () => {
+    const place = ac.getPlace();
     if (!place || !place.formatted_address) return;
 
-    const addr = place.formatted_address;
-    document.getElementById('fAddress').value = addr;
-    input.value = addr;
+    selectedAddress   = place.formatted_address;
+    input.value       = place.formatted_address;
 
-    const prev = document.getElementById('locPrev');
+    const prev        = document.getElementById('locPrev');
+    const shortName   = place.name && place.name !== place.formatted_address
+      ? '<strong>' + place.name + '</strong><br>' : '';
     prev.style.display = 'block';
-    prev.innerHTML = '✅ <strong>' + (place.name || addr) + '</strong><br><span style="font-size:.72rem;opacity:.8">' + addr + '</span>';
+    prev.innerHTML     = '✅ ' + shortName +
+      '<span style="font-size:.73rem;opacity:.85">' + place.formatted_address + '</span>';
 
-    // Clear error
+    // Clear any error state
+    input.classList.remove('err');
     document.getElementById('eA').classList.remove('show');
-    input.style.borderColor = '';
+  });
+
+  // If user clears the field, reset selectedAddress
+  input.addEventListener('input', () => {
+    if (!input.value.trim()) {
+      selectedAddress = '';
+      document.getElementById('locPrev').style.display = 'none';
+    }
   });
 }
 
@@ -661,18 +690,18 @@ function initMaps() {
 // SUBMIT
 // ─────────────────────────────────────────────
 async function submitOrder() {
-  const name    = document.getElementById('fName').value.trim();
-  const phone   = document.getElementById('fPhone').value.trim();
-  const address = document.getElementById('fAddress').value.trim() ||
-                  document.getElementById('addressSearch').value.trim();
-  const notes   = document.getElementById('fNotes').value.trim();
+  const name  = document.getElementById('fName').value.trim();
+  const phone = document.getElementById('fPhone').value.trim();
+  const notes = document.getElementById('fNotes').value.trim();
 
+  // Validate
   let ok = true;
-  [
-    {fi:'fName',    fe:'eN', v:name,    msg:'Nama wajib diisi.'},
-    {fi:'fPhone',   fe:'eP', v:phone,   msg:'Nomor WhatsApp wajib diisi.'},
-    {fi:'addressSearch', fe:'eA', v:address, msg:'Alamat wajib diisi.'},
-  ].forEach(f => {
+  const fields = [
+    {fi:'fName',        fe:'eN', v:name,            msg:'Nama wajib diisi.'},
+    {fi:'fPhone',       fe:'eP', v:phone,            msg:'Nomor WhatsApp wajib diisi.'},
+    {fi:'addressInput', fe:'eA', v:selectedAddress,  msg:'Pilih alamat dari saran Google Maps.'},
+  ];
+  fields.forEach(f => {
     const inp = document.getElementById(f.fi);
     const er  = document.getElementById(f.fe);
     if (!f.v) {
@@ -681,40 +710,44 @@ async function submitOrder() {
       inp.classList.remove('err'); er.classList.remove('show');
     }
   });
-  if (!ok) return;
-  if (!cart.length) { alert('Keranjang masih kosong!'); return; }
+  if (!ok || !cart.length) {
+    if (!cart.length) alert('Keranjang masih kosong!');
+    return;
+  }
 
   const btn = document.getElementById('sendBtn');
   btn.disabled = true; btn.textContent = '⏳ Mengirim pesanan...';
 
   const total = cart.reduce((a,c) => a + c.price * c.qty, 0);
-  const ts = new Date().toLocaleString('id-ID', {dateStyle:'short', timeStyle:'short'});
+  const ts    = new Date().toLocaleString('id-ID', {dateStyle:'short', timeStyle:'short'});
 
   const itemsStr = cart.map(c => {
     let line = c.name + ' x' + c.qty;
-    if (c.sambal) line += ' | ' + c.sambal;
-    if (c.pedas)  line += ' | Pedas Lv.' + c.pedas;
+    if (c.sambal)   line += ' | ' + c.sambal;
+    if (c.pedas)    line += ' | Pedas Lv.' + c.pedas;
     if (c.laukInfo) line += ' | ' + c.laukInfo.join(' / ');
     return line + ' = ' + rp(c.price * c.qty);
   }).join('\n');
 
   const payload = {
-    timestamp: ts, name, phone, address, items: itemsStr,
-    total: rp(total), notes: notes||'-'
+    timestamp: ts, name, phone,
+    address: selectedAddress,
+    items: itemsStr, total: rp(total),
+    notes: notes || '-'
   };
 
-  // Send to Google Sheets via Apps Script
+  // POST to Apps Script → Google Sheets
   if (APPS_SCRIPT_URL !== 'YOUR_APPS_SCRIPT_URL_HERE') {
     try {
       await fetch(APPS_SCRIPT_URL, {
-        method: 'POST', mode: 'no-cors',
-        headers: {'Content-Type':'application/json'},
+        method:'POST', mode:'no-cors',
+        headers:{'Content-Type':'application/json'},
         body: JSON.stringify(payload)
       });
-    } catch(e) { console.warn('Sheet submit failed:', e); }
+    } catch(e) { console.warn('Sheets error:', e); }
   }
 
-  // Build WhatsApp message
+  // WhatsApp fallback always fires
   const waLines = [
     '🛒 *PESANAN BARU — Lawuk Pawuk Jakarta*','',
     '📋 *Detail Pesanan:*',
@@ -728,12 +761,13 @@ async function submitOrder() {
     '','*TOTAL: ' + rp(total) + '*','',
     '👤 *Pemesan:* ' + name,
     '📱 *WA:* ' + phone,
-    '📍 *Alamat:* ' + address,
+    '📍 *Alamat:* ' + selectedAddress,
     '📝 *Catatan:* ' + (notes||'-'),
-    '🕐 ' + ts
+    '🕐 ' + ts,
   ];
   const waMsg = encodeURIComponent(waLines.join('\n'));
 
+  // Show success screen
   document.getElementById('orderView').classList.add('hidden');
   document.getElementById('successView').classList.remove('hidden');
   document.getElementById('mTitle').textContent = '✅ Pesanan Diterima';
